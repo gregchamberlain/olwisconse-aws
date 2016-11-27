@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import { HashRouter, Match, Link } from 'react-router';
 
-import RocketList from './rockets/RocketList';
-import RocketForm from './rockets/RocketForm';
+import UserList from './users/UserList';
+import LocationList from './locations/LocationList';
 
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        <h1>Welcome to React Apollo Fullstack Skeleton!</h1>
-        <RocketForm />
-        <RocketList />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <HashRouter>
+    <div>
+      <Link to="/">Home</Link>
+      <Link to="/members">Members</Link>
+      <Link to="/locations">Locations</Link>
+      <h1>Welcome to Ol' Wisconse!</h1>
+      <Match exactly pattern="/members" component={UserList} />
+      <Match exactly pattern="/locations" component={LocationList} />
+    </div>
+  </HashRouter>
+);
 
 export default App;

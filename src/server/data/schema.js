@@ -9,9 +9,21 @@ type Location {
   name: String!
 }
 
+type Quote {
+  id: ID!
+  phrases: [Phrase]
+  location: Location
+}
+
+type Phrase {
+  sentence: String!
+  person: User!
+}
+
 type Query {
   users: [User]
   locations: [Location]
+  quotes: [Quote]
 }
 
 input UserInput {
@@ -23,8 +35,19 @@ input LocationInput {
   name: String!
 }
 
+input PhraseInput {
+  sentence: String!
+  person: String!
+}
+
+input QuoteInput {
+  phrases: [PhraseInput]
+  location: String
+}
+
 type Mutation {
   signup(user: UserInput!): User
   createLocation(location: LocationInput!): Location
+  createQuote(quote: QuoteInput): Quote
 }
 `;

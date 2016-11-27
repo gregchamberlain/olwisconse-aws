@@ -1,13 +1,26 @@
-import { User, Location } from '../models';
+import { User, Location, Quote } from '../models';
 import bcrypt from 'bcrypt';
 
 const resolveFunctions = {
+  Quote: {
+    location({ id }) {
+      return Location.findById(id);
+    }
+  },
+  Phrase: {
+    person({ id }) {
+      return User.findById(id);
+    }
+  },
   Query: {
     users() {
       return User.find();
     },
     locations() {
       return Location.find();
+    },
+    quotes() {
+      return Quote.find();
     }
   },
   Mutation: {
@@ -22,6 +35,9 @@ const resolveFunctions = {
     },
     createLocation(_, { location }) {
       return Location.create(location);
+    },
+    createQuote(_, { quote }) {
+      return Quote.create(quote);
     }
   }
 };
