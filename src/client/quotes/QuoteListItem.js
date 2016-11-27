@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 const QuoteListItem = ({ quote }) => (
   <div style={styles.container}>
-    <Link to={`/quotes/${quote.id}`}>Go To Quote</Link>
+    {/* <Link to={`/quotes/${quote.id}`}>Go To Quote</Link> */}
     {quote.location ? (
       <Link to={`/locations/${quote.location.id}`}>
         <small>{quote.location.name}</small>
