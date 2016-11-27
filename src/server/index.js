@@ -3,7 +3,9 @@ import bodyParser from 'body-parser';
 import path from 'path';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import mongoose from 'mongoose';
 
+const MONGO_URI = process.env.MONGO_URI || require('../../tools/config').MONGO_URI;
 import typeDefs from './data/schema';
 import resolvers from './data/resolvers';
 
@@ -28,7 +30,11 @@ app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
 
 
 var PORT = process.env.PORT || 3001;
-app.listen(PORT, function(err) {
-  if (err) return console.error(err);
-  console.log('Listening on port', PORT);
+mongoose.connect(MONGO_URI, (mErr) =>  {
+  if (mErr) return console.error(mErr);
+  console.log('MongoDB Connected');
+  app.listen(PORT, function(err) {
+    if (err) return console.error(err);
+    console.log('Listening on port', PORT);
+  });
 });

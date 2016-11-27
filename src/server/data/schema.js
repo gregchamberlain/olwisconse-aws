@@ -1,16 +1,30 @@
 export default `
-type Rocket {
-  id: Int!
+type User {
+  id: ID!
+  username: String!
+}
+
+type Location {
+  id: ID!
   name: String!
-  lifespan: String
-  mass: Float
 }
 
 type Query {
-  rockets: [Rocket]
+  users: [User]
+  locations: [Location]
+}
+
+input UserInput {
+  username: String!
+  password: String!
+}
+
+input LocationInput {
+  name: String!
 }
 
 type Mutation {
-  createRocket(name: String!, lifespan: String!, mass: Float!): Rocket
+  signup(user: UserInput!): User
+  createLocation(location: LocationInput!): Location
 }
 `;
