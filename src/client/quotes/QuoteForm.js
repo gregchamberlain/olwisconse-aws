@@ -77,7 +77,8 @@ class QuoteForm extends Component {
     }));
   }
 
-  submit = () => {
+  submit = e => {
+    e.preventDefault();
     if (this.props.quote) {
       this.props.updateQuote({ variables: {
         id: this.props.quote.id,
@@ -101,7 +102,7 @@ class QuoteForm extends Component {
     const { data } = this.props;
     if (data.loading) return <div>Loading...</div>;
     return (
-      <div>
+      <form onSubmit={this.submit}>
         <h4>New Quote</h4>
         <label>
           Location
@@ -120,7 +121,8 @@ class QuoteForm extends Component {
             </label>
             <label>
               Person
-              <select onChange={this.updatePhrase(idx, "person")} value={this.state.phrases[idx].person}>
+              <select onChange={this.updatePhrase(idx, "person")} value={this.state.phrases[idx].person} required>
+                <option value="">Select Person</option>
                 {data.users.map(user => (
                   <option key={user.id} value={user.id}>{user.username}</option>
                 ))}
@@ -131,8 +133,8 @@ class QuoteForm extends Component {
         ))}
         <button onClick={this.addPhrase}>Add Phrase</button>
         <hr/>
-        <button onClick={this.submit}>Save</button>
-      </div>
+        <button>Save</button>
+      </form>
     );
   }
 }
