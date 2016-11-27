@@ -16,8 +16,14 @@ const resolveFunctions = {
     users() {
       return User.find();
     },
+    userById(id) {
+      return User.findById(id);
+    },
     locations() {
       return Location.find();
+    },
+    locationById(id) {
+      return Location.findById(id);
     },
     quotes() {
       return Quote.find();
