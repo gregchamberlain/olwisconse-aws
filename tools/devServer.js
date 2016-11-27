@@ -4,9 +4,12 @@ var express = require('express');
 var devMiddleware = require('webpack-dev-middleware');
 var hotMiddleware = require('webpack-hot-middleware');
 var config = require('../webpack.config');
+var favicon = require('serve-favicon');
 
 var app = express();
 var compiler = webpack(config);
+
+app.use(favicon(path.join(__dirname, '../favicon.ico')));
 
 app.use(devMiddleware(compiler, {
   publicPath: config.output.publicPath,
