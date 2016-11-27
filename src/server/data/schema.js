@@ -48,6 +48,6 @@ input QuoteInput {
 type Mutation {
   signup(user: UserInput!): User
   createLocation(location: LocationInput!): Location
-  createQuote(quote: QuoteInput): Quote
+  createQuote(quote: QuoteInput!): Quote
 }
 `;

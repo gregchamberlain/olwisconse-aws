@@ -5,7 +5,7 @@ const Quote = mongoose.model('Quote', {
     sentence: { type: String, required: true },
     person: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   }],
-  location: { type: mongoose.Schema.Types.ObjectId, ref: 'Place' },
+  location: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' },
 });
 
 export default Quote;

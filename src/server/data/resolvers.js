@@ -3,13 +3,13 @@ import bcrypt from 'bcrypt';
 
 const resolveFunctions = {
   Quote: {
-    location({ id }) {
-      return Location.findById(id);
+    location({ location }) {
+      return Location.findById(location);
     }
   },
   Phrase: {
-    person({ id }) {
-      return User.findById(id);
+    person({ person }) {
+      return User.findById(person);
     }
   },
   Query: {
