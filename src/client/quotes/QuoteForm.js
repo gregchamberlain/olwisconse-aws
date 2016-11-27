@@ -198,6 +198,35 @@ const Mut = graphql(CreateMutation, {
                   $push: [newQuote]
                 }
               });
+            },
+            Location: (prev, { mutationResult, queryVariables }) => {
+              const newQuote = mutationResult.data.createQuote;
+              if (newQuote.location && queryVariables.id === newQuote.location.id) {
+                return update(prev, {
+                  location: {
+                    quotes: {
+                      $push: [newQuote]
+                    }
+                  }
+                });
+              } else {
+                return prev;
+              }
+            },
+            User: (prev, { mutationResult, queryVariables }) => {
+              const newQuote = mutationResult.data.createQuote;
+              const userPhrases = newQuote.phrases.filter(phrase => phrase.person.username === queryVariables.username);
+              if (userPhrases.length) {
+                return update(prev, {
+                  user: {
+                    quotes: {
+                      $push: [newQuote]
+                    }
+                  }
+                });
+              } else {
+                return prev;
+              }
             }
           }
         });

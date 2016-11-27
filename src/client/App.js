@@ -6,7 +6,7 @@ import UserList from './users/UserList';
 import UserShow from './users/UserShow';
 import LocationList from './locations/LocationList';
 import LocationShow from './locations/LocationShow';
-import QuoteList from './quotes/QuoteList.js';
+import QuoteIndex from './quotes';
 
 const App = () => (
   <HashRouter>
@@ -21,7 +21,7 @@ const App = () => (
       <Match exactly pattern="/members/:username" component={UserShow} />
       <Match exactly pattern="/locations" component={LocationList} />
       <Match exactly pattern="/locations/:id" component={LocationShow} />
-      <Match exactly pattern="/quotes" component={QuoteList} />
+      <Match exactly pattern="/quotes" component={QuoteIndex} />
     </div>
   </HashRouter>
 );
