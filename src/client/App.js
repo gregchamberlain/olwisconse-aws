@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { HashRouter, Match, Link } from 'react-router';
 
+import Home from './home';
 import UserList from './users/UserList';
 import LocationList from './locations/LocationList';
-
-import QuoteForm from './quotes/QuoteForm';
+import QuoteList from './quotes/QuoteList.js';
 
 const App = () => (
   <HashRouter>
@@ -12,10 +12,12 @@ const App = () => (
       <Link to="/">Home</Link>
       <Link to="/members">Members</Link>
       <Link to="/locations">Locations</Link>
-      <h1>Welcome to Ol' Wisconse!</h1>
-      <QuoteForm />
+      <Link to="/quotes">Quotes</Link>
+
+      <Match exactly pattern="/" component={Home} />
       <Match exactly pattern="/members" component={UserList} />
       <Match exactly pattern="/locations" component={LocationList} />
+      <Match exactly pattern="/quotes" component={QuoteList} />
     </div>
   </HashRouter>
 );

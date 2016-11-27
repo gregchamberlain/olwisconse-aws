@@ -89,12 +89,8 @@ class QuoteForm extends Component {
         console.log('an error occured', error);
       });
     } else {
-      this.props.createQuote({
-        variables: {
-          quote: this.state
-        }
-      }).then(({ data }) => {
-        console.log('got data', data);
+      this.props.create(this.state).then(({ data }) => {
+        this.setState(emptyQuote);
       }).catch(error => {
         console.log('an error occured', error);
       });
@@ -155,6 +151,17 @@ const Query = gql`query {
 const CreateMutation = gql`mutation CreateQuote($quote: QuoteInput!) {
   createQuote(quote: $quote) {
     id
+    phrases {
+      sentence,
+      person {
+        id
+        username
+      }
+    }
+    location {
+      id
+      name
+    }
   }
 }`;
 
@@ -175,6 +182,26 @@ const UpdateMutation = gql`mutation updateQuote($id: String!, $phrases: [PhraseI
   }
 }`;
 
-const Mut = graphql(CreateMutation, { name: 'createQuote' })(QuoteForm);
+const Mut = graphql(CreateMutation, {
+  props({ mutate }) {
+    return {
+      create(quote) {
+        return mutate({
+          variables: { quote },
+          updateQueries: {
+            Quotes: (prev, { mutationResult }) => {
+              const newQuote = mutationResult.data.createQuote;
+              return update(prev, {
+                quotes: {
+                  $push: [newQuote]
+                }
+              });
+            }
+          }
+        });
+      }
+    };
+  }
+})(QuoteForm);
 // const UpMut = graphql(UpdateMutation, { name: 'updateQuote'})(Mut);
 export default graphql(Query)(Mut);
