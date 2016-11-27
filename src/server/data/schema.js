@@ -2,11 +2,13 @@ export default `
 type User {
   id: ID!
   username: String!
+  quotes: [Quote]
 }
 
 type Location {
   id: ID!
   name: String!
+  quotes: [Quote]
 }
 
 type Quote {

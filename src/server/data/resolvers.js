@@ -2,6 +2,16 @@ import { User, Location, Quote } from '../models';
 import bcrypt from 'bcrypt';
 
 const resolveFunctions = {
+  User: {
+    quotes({ id }) {
+      return Quote.find({ 'phrases.person': id });
+    }
+  },
+  Location: {
+    quotes({ id }) {
+      return Quote.find({ location: id });
+    }
+  },
   Quote: {
     location({ location }) {
       return Location.findById(location);
