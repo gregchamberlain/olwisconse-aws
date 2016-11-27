@@ -16,13 +16,13 @@ const resolveFunctions = {
     users() {
       return User.find();
     },
-    userByUsername(_, { username }) {
+    user(_, { username }) {
       return User.findOne({ username });
     },
     locations() {
       return Location.find();
     },
-    locationById(_, { id }) {
+    location(_, { id }) {
       return Location.findById(id);
     },
     quotes() {

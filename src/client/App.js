@@ -3,7 +3,9 @@ import { HashRouter, Match, Link } from 'react-router';
 
 import Home from './home';
 import UserList from './users/UserList';
+import UserShow from './users/UserShow';
 import LocationList from './locations/LocationList';
+import LocationShow from './locations/LocationShow';
 import QuoteList from './quotes/QuoteList.js';
 
 const App = () => (
@@ -16,7 +18,9 @@ const App = () => (
 
       <Match exactly pattern="/" component={Home} />
       <Match exactly pattern="/members" component={UserList} />
+      <Match exactly pattern="/members/:username" component={UserShow} />
       <Match exactly pattern="/locations" component={LocationList} />
+      <Match exactly pattern="/locations/:id" component={LocationShow} />
       <Match exactly pattern="/quotes" component={QuoteList} />
     </div>
   </HashRouter>

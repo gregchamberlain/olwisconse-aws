@@ -22,9 +22,9 @@ type Phrase {
 
 type Query {
   users: [User]
-  userByUsername(username: String!): User
+  user(username: String!): User
   locations: [Location]
-  locationById(id: String!): Location
+  location(id: String!): Location
   quotes: [Quote]
 }
 

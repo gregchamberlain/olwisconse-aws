@@ -11,7 +11,7 @@ const QuoteListItem = ({ quote }) => (
     ) : null }
     {quote.phrases.map((phrase, idx) => (
       <div key={`${quote.id}-${idx}`}>
-        "{phrase.sentence}" - <Link to={`/members/${phrase.person.id}`}>{phrase.person.username}</Link>
+        "{phrase.sentence}" - <Link to={`/members/${phrase.person.username}`}>{phrase.person.username}</Link>
       </div>
     ))}
   </div>
