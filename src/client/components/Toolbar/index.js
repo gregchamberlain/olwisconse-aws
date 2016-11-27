@@ -16,12 +16,18 @@ const Toolbar = () => (
 
 const styles = {
   toolbar: {
+    position: 'fixed',
+    boxSizing: 'border-box',
     display: 'flex',
+    top: 0,
+    left: 0,
+    right: 0,
     height: 56,
     backgroundColor: '#4CAF50',
   },
   toolbarItem: {
     height: '100%',
+    boxSizing: 'border-box',
     display: 'flex',
     alignItems: 'center',
     color: '#FFF',

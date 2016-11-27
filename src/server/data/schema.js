@@ -15,6 +15,8 @@ type Quote {
   id: ID!
   phrases: [Phrase]
   location: Location
+  createdAt: String
+  updatedAt: String
 }
 
 type Phrase {

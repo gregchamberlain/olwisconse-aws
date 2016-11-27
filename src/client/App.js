@@ -14,13 +14,14 @@ const App = () => (
   <HashRouter>
     <div>
       <Toolbar />
-
-      <Match exactly pattern="/" component={Home} />
-      <Match exactly pattern="/members" component={UserList} />
-      <Match exactly pattern="/members/:username" component={UserShow} />
-      <Match exactly pattern="/locations" component={LocationList} />
-      <Match exactly pattern="/locations/:id" component={LocationShow} />
-      <Match exactly pattern="/quotes" component={QuoteIndex} />
+      <div style={{marginTop: 56, padding: 10}}>
+        <Match exactly pattern="/" component={Home} />
+        <Match exactly pattern="/members" component={UserList} />
+        <Match exactly pattern="/members/:username" component={UserShow} />
+        <Match exactly pattern="/locations" component={LocationList} />
+        <Match exactly pattern="/locations/:id" component={LocationShow} />
+        <Match exactly pattern="/quotes" component={QuoteIndex} />
+      </div>
     </div>
   </HashRouter>
 );

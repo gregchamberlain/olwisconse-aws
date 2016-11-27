@@ -8,6 +8,7 @@ import LocationForm from './LocationForm.js';
 const LocationList = ({ data }) => (
   <div>
     <h1>Locations</h1>
+    <LocationForm />
     { data.loading ? <div>Loading...</div> : (
       <ul>
         {data.locations.map(location => (
@@ -17,7 +18,6 @@ const LocationList = ({ data }) => (
         ))}
       </ul>
     )}
-    <LocationForm />
   </div>
 );
 

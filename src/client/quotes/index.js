@@ -8,8 +8,8 @@ import QuoteForm from './QuoteForm';
 const QuoteIndex = ({ data }) => (
   <div>
     <h1>Quotes</h1>
-    { data.loading ? <h3>Loading...</h3> : <QuoteList quotes={data.quotes} />}
     <QuoteForm />
+    { data.loading ? <h3>Loading...</h3> : <QuoteList quotes={data.quotes} />}
   </div>
 );
 
