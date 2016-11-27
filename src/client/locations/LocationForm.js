@@ -28,7 +28,7 @@ class LocationForm extends Component {
       <form onSubmit={this.submit}>
         <div>
           <label>Name</label>
-          <input type="text" onChange={this.update('name')} value={this.state.name} />
+          <input type="text" onChange={this.update('name')} value={this.state.name} required />
         </div>
         <button>Create</button>
       </form>
