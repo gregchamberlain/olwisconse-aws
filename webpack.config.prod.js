@@ -7,6 +7,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist/client'),
     filename: 'bundle.js',
+    publicPath: '/static/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
