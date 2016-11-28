@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import styles from './style.css';
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -24,18 +26,25 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submit}>
-        <h1>Login</h1>
-        <div>
-          <label>Username</label>
-          <input type="text" onChange={this.update('username')} value={this.state.username} />
-        </div>
-        <div>
-          <label>Password</label>
-          <input type="password" onChange={this.update('password')} value={this.state.password} />
-        </div>
-        <button>Login</button>
-      </form>
+      <div className={styles.background}>
+        <form onSubmit={this.submit} className={styles.form}>
+          <input
+            className={styles.input}
+            placeholder="Username"
+            type="text"
+            onChange={this.update('username')}
+            value={this.state.username}
+          />
+          <input
+            className={styles.input}
+            placeholder="Password"
+            type="password"
+            onChange={this.update('password')}
+            value={this.state.password}
+          />
+          <button className={styles.button}>Login</button>
+        </form>
+      </div>
     );
   }
 }
