@@ -57,7 +57,7 @@ const resolveFunctions = {
       const currentUser = await   User.findOne({ username: user.username });
       if (!currentUser) throw new Error('User does not exist');
       if (bcrypt.compareSync(user.password, currentUser.passwordDigest)) {
-        res.cookie('OLWISCONE_SESSION', currentUser.sessionToken);
+        res.cookie('OLWISCONE_SESSION', currentUser.sessionToken, { maxAge: 1000 * 60 * 60 * 24 * 365 });
         return currentUser;
       } else {
         throw new Error('Invalid password for that username');
