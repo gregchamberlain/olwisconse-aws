@@ -9,15 +9,19 @@ class Login extends Component {
     super(props);
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      errors: []
     };
   }
 
   submit = e => {
     e.preventDefault();
-    this.props.login(this.state).then(({ data }) => {
+    const { errors, ...user } = this.state;
+    this.props.login(user).then(({ data }) => {
       console.log('yay!', data);
-    }).catch(err => console.error(err));
+    }).catch(err => {
+      this.setState({ errors: err.graphQLErrors });
+    });
   }
 
   update = name => e => {
@@ -25,22 +29,28 @@ class Login extends Component {
   }
 
   render() {
+    const { username, password, errors } = this.state;
     return (
       <div className={styles.background}>
         <form onSubmit={this.submit} className={styles.form}>
+          { errors && errors.map((error, idx) => (
+            <div key={`error-${idx}`} className={styles.error}>
+              {error.message}
+            </div>
+          ))}
           <input
             className={styles.input}
             placeholder="Username"
             type="text"
             onChange={this.update('username')}
-            value={this.state.username}
+            value={username}
           />
           <input
             className={styles.input}
             placeholder="Password"
             type="password"
             onChange={this.update('password')}
-            value={this.state.password}
+            value={password}
           />
           <button className={styles.button}>Login</button>
         </form>

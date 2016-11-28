@@ -1,9 +1,15 @@
 export default `
 type User {
   id: ID!
+  profilePicture: Image
   username: String!
   displayName: String!
   quotes: [Quote]
+}
+
+type Image {
+  id: ID!
+  url: String!
 }
 
 type Location {
@@ -57,6 +63,7 @@ type Mutation {
   signup(user: UserInput!): User
   login(user: UserInput!): User
   logout: User
+  updateProfilePicture(url: String): Image
   createLocation(location: LocationInput!): Location
   createQuote(quote: QuoteInput!): Quote
 }

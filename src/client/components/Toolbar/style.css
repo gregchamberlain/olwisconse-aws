@@ -1,0 +1,24 @@
+:local .toolbar {
+  position: fixed;
+  box-sizing: border-box;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  background-color: #4CAF50;
+}
+
+:local .toolbarItem {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  color: #FFF;
+  text-decoration: none;
+  padding: 0 15px;
+}
+
+:local .spacer {
+  flex: 1;
+}

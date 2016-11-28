@@ -49,3 +49,13 @@
   background-color: #FFF;
   color: #444;
 }
+
+:local .error {
+  margin: 10px;
+  font-weight: bold;
+  text-align: center;
+  background-color: #F44336;
+  color: #FFF;
+  border-radius: 2px;
+  padding: 10px;
+}

@@ -1,4 +1,4 @@
-import { User, Location, Quote } from '../models';
+import { User, Location, Quote, Image } from '../models';
 import { generateSessionToken } from '../utils';
 import bcrypt from 'bcrypt';
 
@@ -72,6 +72,12 @@ const resolveFunctions = {
       } else {
         return null;
       }
+    },
+    async updateProfilePicture(_, { url }, { req }) {
+      const image = await Image.create({ url, people: [req.user.id]});
+      req.user.profilePicture = image.id;
+      await req.user.save();
+      return image;
     },
     createLocation(_, { location }) {
       return Location.create(location);

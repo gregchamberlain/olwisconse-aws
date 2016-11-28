@@ -12,9 +12,19 @@ const Profile = ({ data, mutate, client }) => {
     });
   };
 
+  const uploadImage = () => {
+    cloudinary.openUploadWidget({
+      cloud_name: 'dnqyghipo',
+      upload_preset: 'bhxvnbw4'
+    }, (error, result) => {
+      console.log(error, result);
+    });
+  };
+
   return data.loading ? <div>Loading...</div> : (
     <div>
       <h1>{data.currentUser.displayName}<small> - @{data.currentUser.username}</small></h1>
+      <button onClick={uploadImage}>Upload Profile Pic</button>
       <button onClick={logout}>Logout</button>
     </div>
   );
