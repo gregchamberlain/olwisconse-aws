@@ -12,8 +12,9 @@ const Profile = ({ data, mutate, client }) => {
     });
   };
 
-  return (
+  return data.loading ? <div>Loading...</div> : (
     <div>
+      <h1>{data.currentUser.displayName}<small> - @{data.currentUser.username}</small></h1>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -25,4 +26,12 @@ const LOGOUT_MUTATION = gql`mutation Logout {
   }
 }`;
 
-export default withApollo(graphql(LOGOUT_MUTATION)(Profile));
+const PROFILE_QUERY = gql`query CurrentUser {
+  currentUser {
+    id
+    username
+    displayName
+  }
+}`;
+
+export default withApollo(graphql(PROFILE_QUERY)(graphql(LOGOUT_MUTATION)(Profile)));
