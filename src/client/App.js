@@ -7,6 +7,7 @@ import Toolbar from './components/Toolbar';
 
 import Home from './home';
 import Login from './login';
+import Profile from './profile';
 import UserList from './users/UserList';
 import UserShow from './users/UserShow';
 import LocationList from './locations/LocationList';
@@ -20,6 +21,7 @@ const App = ({ data }) => data.loading ? <div>Loading...</div> : (
         <Toolbar />
         <div style={{marginTop: 56, padding: 10}}>
           <Match exactly pattern="/" component={Home} />
+          <Match exactly pattern="/profile" component={Profile} />
           <Match exactly pattern="/members" component={UserList} />
           <Match exactly pattern="/members/:username" component={UserShow} />
           <Match exactly pattern="/locations" component={LocationList} />

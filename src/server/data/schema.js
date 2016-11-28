@@ -2,6 +2,7 @@ export default `
 type User {
   id: ID!
   username: String!
+  displayName: String!
   quotes: [Quote]
 }
 

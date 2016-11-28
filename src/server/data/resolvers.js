@@ -65,7 +65,7 @@ const resolveFunctions = {
     },
     async logout(_, args, { req, res }) {
       if (req.user) {
-        res.cookie('OLWISCONE_SESSION', null);
+        res.clearCookie('OLWISCONE_SESSION');
         req.user.sessionToken = generateSessionToken();
         await req.user.save();
         return req.user;

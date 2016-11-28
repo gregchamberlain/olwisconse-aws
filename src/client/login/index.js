@@ -44,6 +44,7 @@ const mutation = gql`mutation Login($user: UserInput!) {
     login(user: $user) {
       id
       username
+      displayName
     }
 }`;
 

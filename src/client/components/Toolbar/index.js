@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
+
 const iconSrc = require('../../assets/icon.png');
 
-const Toolbar = () => (
+const Toolbar = ({ data }) => (
   <div style={styles.toolbar}>
     <Link to="/" style={styles.toolbarItem}>
       <img src={iconSrc} width="48" height="48"/>
@@ -11,6 +14,9 @@ const Toolbar = () => (
     <Link to="/members" style={styles.toolbarItem}>Members</Link>
     <Link to="/locations" style={styles.toolbarItem}>Locations</Link>
     <Link to="/quotes" style={styles.toolbarItem}>Quotes</Link>
+    <Link to="/profile" style={styles.toolbarItem}>
+      { data.loading ? 'Loading' : data.currentUser.displayName }
+    </Link>
   </div>
 );
 
@@ -39,4 +45,12 @@ const styles = {
   }
 };
 
-export default Toolbar;
+const PROFILE_QUERY = gql`query CurrentUser {
+  currentUser {
+    id
+    username
+    displayName
+  }
+}`;
+
+export default graphql(PROFILE_QUERY)(Toolbar);
