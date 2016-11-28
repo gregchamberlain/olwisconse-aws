@@ -1,3 +1,4 @@
+require("babel-polyfill");
 import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -25,7 +26,10 @@ if (process.env.NODE_ENV === 'production') {
   });
 } else {
   const cors = require('cors');
-  app.use(cors());
+  app.use(cors({
+    origin: "http://localhost:3000",
+    credentials: true
+  }));
   app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql'
   }));
@@ -44,20 +48,20 @@ app.use('/graphql', cookieParser(), bodyParser.json(), getSession, (req, res, ne
   return graphqlExpress({
     schema,
     context: { req, res },
-    formatParams(params) {
-      if (!req.user && !(params.operationName === 'Login' || params.operationName === 'Signup' || params.operationName === 'CurrentUser')) {
-        params.query = undefined;
-      }
-      return params;
-    },
-    formatError(error) {
-      if (!req.user) return {
-        message: 'You are not authorized to access this'
-      };
-      return {
-        message: error.message
-      };
-    }
+    // formatParams(params) {
+    //   if (!req.user && !(params.operationName === 'Login' || params.operationName === 'Signup' || params.operationName === 'CurrentUser')) {
+    //     params.query = undefined;
+    //   }
+    //   return params;
+    // },
+    // formatError(error) {
+    //   if (!req.user) return {
+    //     message: 'You are not authorized to access this'
+    //   };
+    //   return {
+    //     message: error.message
+    //   };
+    // }
   })(req,res, next);
 });
 

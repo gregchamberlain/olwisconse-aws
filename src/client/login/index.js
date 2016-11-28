@@ -13,7 +13,9 @@ class Login extends Component {
 
   submit = e => {
     e.preventDefault();
-    console.log(this.state);
+    this.props.login(this.state).then(({ data }) => {
+      console.log('yay!', data);
+    }).catch(err => console.error(err));
   }
 
   update = name => e => {
@@ -38,8 +40,27 @@ class Login extends Component {
   }
 }
 
-const mutation = gql`mutation Login(user: UserInput!)
+const mutation = gql`mutation Login($user: UserInput!) {
+    login(user: $user) {
+      id
+      username
+    }
+}`;
 
-`;
-
-export default Login;
+export default graphql(mutation, {
+  props({ mutate }) {
+    return {
+      login(user) {
+        return mutate({
+          variables: { user },
+          updateQueries: {
+            CurrentUser: (prev, { mutationResult }) => {
+              const currentUser = mutationResult.data.login;
+              return { currentUser };
+            }
+          }
+        });
+      }
+    };
+  }
+})(Login);
