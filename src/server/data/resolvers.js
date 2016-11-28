@@ -1,4 +1,5 @@
 import { User, Location, Quote } from '../models';
+import { generateSessionToken } from '../utils';
 import bcrypt from 'bcrypt';
 
 const resolveFunctions = {
@@ -23,6 +24,9 @@ const resolveFunctions = {
     }
   },
   Query: {
+    currentUser(_, args, { req }) {
+      return req.user;
+    },
     users() {
       return User.find();
     },
@@ -48,6 +52,26 @@ const resolveFunctions = {
         passwordDigest,
         sessionToken: ( Math.floor( Math.random() * 100000 ) ).toString() }
       );
+    },
+    async login(_, { user }, { res }) {
+      const currentUser = await   User.findOne({ username: user.username });
+      if (!currentUser) throw new Error('User does not exist');
+      if (bcrypt.compareSync(user.password, currentUser.passwordDigest)) {
+        res.cookie('OLWISCONE_SESSION', currentUser.sessionToken);
+        return currentUser;
+      } else {
+        throw new Error('Invalid password for that username');
+      }
+    },
+    async logout(_, args, { req, res }) {
+      if (req.user) {
+        res.cookie('OLWISCONE_SESSION', null);
+        req.user.sessionToken = generateSessionToken();
+        await req.user.save();
+        return req.user;
+      } else {
+        return null;
+      }
     },
     createLocation(_, { location }) {
       return Location.create(location);

@@ -25,6 +25,7 @@ type Phrase {
 }
 
 type Query {
+  currentUser: User
   users: [User]
   user(username: String!): User
   locations: [Location]
@@ -53,6 +54,8 @@ input QuoteInput {
 
 type Mutation {
   signup(user: UserInput!): User
+  login(user: UserInput!): User
+  logout: User
   createLocation(location: LocationInput!): Location
   createQuote(quote: QuoteInput!): Quote
 }

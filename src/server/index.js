@@ -1,10 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import path from 'path';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
+import { OperationStore } from 'graphql-server-module-operation-store';
 import mongoose from 'mongoose';
 import favicon from 'serve-favicon';
+import { User } from './models';
 
 const MONGO_URI = process.env.MONGO_URI || require('../../tools/config').MONGO_URI;
 import typeDefs from './data/schema';
@@ -28,7 +31,35 @@ if (process.env.NODE_ENV === 'production') {
   }));
 }
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+const store = new OperationStore(schema);
+const getSession = (req, res, next) => {
+  User.findOne({ sessionToken: req.cookies['OLWISCONE_SESSION'] }, (err, user) => {
+    if (user) req.user = user;
+    next();
+  });
+};
+
+store.put('query Locations{ locations { id } }');
+app.use('/graphql', cookieParser(), bodyParser.json(), getSession, (req, res, next) => {
+  return graphqlExpress({
+    schema,
+    context: { req, res },
+    formatParams(params) {
+      if (!req.user && !(params.operationName === 'Login' || params.operationName === 'Signup' || params.operationName === 'CurrentUser')) {
+        params.query = undefined;
+      }
+      return params;
+    },
+    formatError(error) {
+      if (!req.user) return {
+        message: 'You are not authorized to access this'
+      };
+      return {
+        message: error.message
+      };
+    }
+  })(req,res, next);
+});
 
 
 var PORT = process.env.PORT || 3001;

@@ -9,7 +9,12 @@ if (process.env.NODE_ENV === 'production') {
   config = { dataIdFromObject: o => o.id };
 } else {
   config = {
-    networkInterface: createNetworkInterface({ uri: 'http://localhost:3001/graphql' }),
+    networkInterface: createNetworkInterface({
+      uri: 'http://localhost:3001/graphql',
+      opts: {
+        credentials: true,
+      }
+    }),
     dataIdFromObject: o => o.id
   };
 }
