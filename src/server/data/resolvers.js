@@ -6,6 +6,13 @@ const resolveFunctions = {
   User: {
     quotes({ id }) {
       return Quote.find({ 'phrases.person': id });
+    },
+    profilePicture({ profilePicture }) {
+      if (profilePicture) {
+        return Image.findById(profilePicture);
+      } else {
+        return null;
+      }
     }
   },
   Location: {

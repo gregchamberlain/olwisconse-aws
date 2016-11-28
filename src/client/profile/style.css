@@ -1,0 +1,7 @@
+:local .profilePicture {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  background-position: center;
+  background-size: cover;
+}

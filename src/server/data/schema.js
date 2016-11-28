@@ -63,7 +63,7 @@ type Mutation {
   signup(user: UserInput!): User
   login(user: UserInput!): User
   logout: User
-  updateProfilePicture(url: String): Image
+  updateProfilePicture(url: String!): Image
   createLocation(location: LocationInput!): Location
   createQuote(quote: QuoteInput!): Quote
 }

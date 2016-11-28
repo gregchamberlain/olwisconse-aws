@@ -2,6 +2,8 @@ import React from 'react';
 import { graphql, withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 
+import ProfilePicture from './ProfilePicture';
+
 const Profile = ({ data, mutate, client }) => {
 
   const logout = () => {
@@ -24,7 +26,7 @@ const Profile = ({ data, mutate, client }) => {
   return data.loading ? <div>Loading...</div> : (
     <div>
       <h1>{data.currentUser.displayName}<small> - @{data.currentUser.username}</small></h1>
-      <button onClick={uploadImage}>Upload Profile Pic</button>
+      <ProfilePicture src={data.currentUser.profilePicture ? data.currentUser.profilePicture.url : null}/>
       <button onClick={logout}>Logout</button>
     </div>
   );
@@ -41,6 +43,9 @@ const PROFILE_QUERY = gql`query CurrentUser {
     id
     username
     displayName
+    profilePicture {
+      url
+    }
   }
 }`;
 
