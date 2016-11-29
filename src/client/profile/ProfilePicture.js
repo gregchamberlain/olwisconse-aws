@@ -67,18 +67,19 @@ const signed = graphql(GET_SIGNED_URLS, {
 export default graphql(MUTATION, {
   props: ({ mutate }) => ({
     update: (url) => mutate({
-      variables: { url }
-    })
-  }),
-  updateQueries: {
-    CurrentUser: (prev, { mutationResult }) => {
-      const profilePicture = mutationResult.data.updateProfilePicture;
-      return update(prev, { currentUser: {
-          profilePicture: {
-            $set: profilePicture
-          }
+      variables: { url },
+      updateQueries: {
+        CurrentUser: (prev, { mutationResult }) => {
+          const profilePicture = mutationResult.data.updateProfilePicture;
+          return update(prev, {
+            currentUser: {
+              profilePicture: {
+                $set: profilePicture
+              }
+            }
+          });
         }
-      });
-    }
-  }
+      }
+    })
+  })
 })(signed);
