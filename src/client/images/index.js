@@ -7,7 +7,7 @@ import ImageList from './ImageList';
 
 const ImageIndex = ({ data, create }) => data.loading ? <h1>Loading...</h1> : (
   <div>
-    <h1>All Images</h1>
+    <h1 style={{textAlign: 'center'}}>All Images</h1>
     { data.images && <ImageList images={data.images} onUploadComplete={create} />}
   </div>
 );

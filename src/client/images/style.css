@@ -1,11 +1,13 @@
 :local .list {
+  width: 1050px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
 }
 
 :local .item {
-  width: 150px;
-  height: 150px;
+  width: 148px;
+  height: 148px;
   background-color: #ccc;
   border-radius: 5px;
   margin: 1px;
