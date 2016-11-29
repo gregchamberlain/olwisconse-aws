@@ -1,6 +1,7 @@
 import React from 'react';
 import ApolloClient, { createNetworkInterface } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
+import configureStore from './redux/store';
 
 import App from './App';
 
@@ -15,20 +16,6 @@ const opts = process.env.NODE_ENV === 'production' ? ({
     credentials: 'include',
   }
 });
-// let config;
-// if (process.env.NODE_ENV === 'production') {
-//   config = { dataIdFromObject: o => o.id };
-// } else {
-//   config = {
-//     networkInterface: createNetworkInterface({
-//       uri: 'http://localhost:3001/graphql',
-//       opts: {
-//         credentials: 'include',
-//       }
-//     }),
-//
-//   };
-// }
 
 const config = {
   networkInterface: createNetworkInterface(opts),
@@ -36,9 +23,11 @@ const config = {
 };
 
 const client = new ApolloClient(config);
+const store = configureStore(client);
+window.store = process.env.NODE_ENV === 'production' ? null : store;
 
 const Root = () => (
-  <ApolloProvider client={client}>
+  <ApolloProvider store={store} client={client}>
     <App />
   </ApolloProvider>
 );

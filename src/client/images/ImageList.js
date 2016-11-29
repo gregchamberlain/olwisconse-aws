@@ -1,22 +1,29 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Add from 'react-icons/lib/md/add-circle';
 
 import styles from './style.css';
 import ImageListItem from './ImageListItem';
-import { UploadButton } from '../components/ImageUploader';
+import { openModal, closeModal } from '../redux/actions/uploadModal';
 
-const ImageList = ({ images, onUploadComplete }) => (
+const ImageList = ({ images, openUploader }) => (
   <div className={styles.list}>
     {images.map(image => (
       <ImageListItem key={image.id} image={image} />
     ))}
-    <UploadButton
-      accept="image/*"
-      className={styles.item}
-      onComplete={onUploadComplete}>
+    <div className={styles.item} onClick={openUploader}>
       <Add />
-    </UploadButton>
+    </div>
   </div>
 );
 
-export default ImageList;
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  openUploader: () => dispatch(openModal(
+    urls => {
+      ownProps.onUploadComplete(urls);
+      dispatch(closeModal());
+    }
+  ))
+});
+
+export default connect(null, mapDispatchToProps)(ImageList);

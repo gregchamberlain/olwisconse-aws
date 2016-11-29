@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import { HashRouter, Match, Link } from 'react-router';
 
 import Toolbar from './components/Toolbar';
+import ImageUploader from './components/ImageUploader/ImageUploaderContainer';
 
 import Home from './home';
 import Login from './login';
@@ -30,6 +31,7 @@ const App = ({ data }) => data.loading ? <div>Loading...</div> : (
           <Match exactly pattern="/quotes" component={QuoteIndex} />
           <Match exactly pattern="/images" component={ImageIndex} />
         </div>
+        <ImageUploader />
       </div>
     </HashRouter>
   ) : (
