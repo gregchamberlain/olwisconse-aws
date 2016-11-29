@@ -38,6 +38,7 @@ type Query {
   locations: [Location]
   location(id: String!): Location
   quotes: [Quote]
+  images: [Image]
 }
 
 input UserInput {
@@ -73,5 +74,6 @@ type Mutation {
   updateProfilePicture(url: String!): Image
   createLocation(location: LocationInput!): Location
   createQuote(quote: QuoteInput!): Quote
+  createImages(urls: [String]!): [Image]
 }
 `;

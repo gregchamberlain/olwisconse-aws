@@ -6,6 +6,7 @@ import UploadIcon from 'react-icons/lib/md/cloud-upload';
 
 import styles from './style.css';
 import ImagePreview from './ImagePreview';
+export UploadButton from './UploadButton';
 
 class ImageUploader extends Component {
 
@@ -90,13 +91,13 @@ class ImageUploader extends Component {
     });
   }
 
-  requestClose = () => {
+  requestClose = e => {
     if (this.state.files.length) {
       if (!this.state.progress.length && confirm('Exit without uploading images?')) {
-        this.props.onCloseRequest();
+        this.props.onCloseRequest(e);
       }
     } else {
-      this.props.onCloseRequest();
+      this.props.onCloseRequest(e);
     }
   }
 

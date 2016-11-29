@@ -1,0 +1,21 @@
+:local .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+:local .item {
+  width: 150px;
+  height: 150px;
+  background-color: #ccc;
+  border-radius: 5px;
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 64px;
+  color: #4CAF50;
+  cursor: pointer;
+  background-position: center;
+  background-size: cover;
+  border-radius: 2px;
+}

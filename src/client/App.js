@@ -13,6 +13,7 @@ import UserShow from './users/UserShow';
 import LocationList from './locations/LocationList';
 import LocationShow from './locations/LocationShow';
 import QuoteIndex from './quotes';
+import ImageIndex from './images';
 
 const App = ({ data }) => data.loading ? <div>Loading...</div> : (
   data.currentUser ? (
@@ -27,6 +28,7 @@ const App = ({ data }) => data.loading ? <div>Loading...</div> : (
           <Match exactly pattern="/locations" component={LocationList} />
           <Match exactly pattern="/locations/:id" component={LocationShow} />
           <Match exactly pattern="/quotes" component={QuoteIndex} />
+          <Match exactly pattern="/images" component={ImageIndex} />
         </div>
       </div>
     </HashRouter>

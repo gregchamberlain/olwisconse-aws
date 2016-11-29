@@ -15,6 +15,7 @@ const Toolbar = ({ data }) => (
     <Link to="/members" className={styles.toolbarItem}>Members</Link>
     <Link to="/locations" className={styles.toolbarItem}>Locations</Link>
     <Link to="/quotes" className={styles.toolbarItem}>Quotes</Link>
+    <Link to="/images" className={styles.toolbarItem}>Images</Link>
     <Link to="/profile" className={styles.toolbarItem}>
       { data.loading ? 'Loading' : data.currentUser.displayName }
     </Link>

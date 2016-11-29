@@ -50,6 +50,9 @@ const resolveFunctions = {
     },
     quotes() {
       return Quote.find();
+    },
+    images() {
+      return Image.find();
     }
   },
   Mutation: {
@@ -115,6 +118,10 @@ const resolveFunctions = {
     },
     createQuote(_, { quote }) {
       return Quote.create(quote);
+    },
+    createImages(_, { urls }) {
+      const images = urls.map(url => ({ url }));
+      return Image.insertMany(images);
     }
   }
 };

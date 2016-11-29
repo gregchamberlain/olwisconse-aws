@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import update from 'immutability-helper';
 
 import styles from './style.css';
-import ImageUploader from '../components/ImageUploader';
+import { UploadButton } from '../components/ImageUploader';
 
 class ProfilePicture extends Component {
 
@@ -33,21 +33,13 @@ class ProfilePicture extends Component {
     return (
       <div className={styles.profilePicture} style={{backgroundImage: `url(${src})`}}>
         <div className={styles.profilePictureInner}>View</div>
-        <div className={styles.profilePictureInner} onClick={this.openModal}>Edit</div>
-        <ImageUploader
-          getSignedUrls={getSignedUrls}
-          onComplete={this.update}
-          onCloseRequest={this.closeModal}
-          open={this.state.modalOpen}
-        />
+        <UploadButton className={styles.profilePictureInner} onComplete={this.update}>
+          Edit
+        </UploadButton>
       </div>
     );
   }
 }
-
-const GET_SIGNED_URLS = gql`mutation GetSignedUrls($files: [FileInput]!) {
-  getSignedUrls(files: $files)
-}`;
 
 const MUTATION = gql`mutation UpdateProfilePicture($url: String!){
   updateProfilePicture(url: $url) {
@@ -55,14 +47,6 @@ const MUTATION = gql`mutation UpdateProfilePicture($url: String!){
     url
   }
 }`;
-
-const signed = graphql(GET_SIGNED_URLS, {
-  props: ({ mutate }) => ({
-    getSignedUrls: (files) => mutate({
-      variables: { files }
-    })
-  })
-})(ProfilePicture);
 
 export default graphql(MUTATION, {
   props: ({ mutate }) => ({
@@ -82,4 +66,4 @@ export default graphql(MUTATION, {
       }
     })
   })
-})(signed);
+})(ProfilePicture);
