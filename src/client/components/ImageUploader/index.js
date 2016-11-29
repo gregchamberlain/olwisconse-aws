@@ -13,7 +13,8 @@ class ImageUploader extends Component {
     super(props);
     this.state = {
       files: [],
-      progress: []
+      progress: [],
+      uploading: false
     };
   }
 
@@ -23,7 +24,7 @@ class ImageUploader extends Component {
         files: {
           $push: acceptedFiles
         }
-      }), () => console.log(this.state.files));
+      }));
     }
   }
 
@@ -37,7 +38,7 @@ class ImageUploader extends Component {
   }
 
   upload = () => {
-    let complete = 0;
+    this.setState({ uploading: true });
     const files = this.state.files.map(file => {
       const splitFilename = file.name.split('.');
       const filename = `${Math.random().toString(36).substr(2,20)}.${splitFilename[splitFilename.length - 1]}`;
@@ -48,44 +49,49 @@ class ImageUploader extends Component {
     });
     this.props.getSignedUrls(files).then(({ data }) => {
       const signedUrls = data.getSignedUrls;
-      const urls = signedUrls.map(url => url.split('?')[0]);
-      console.log(signedUrls, urls);
+      let complete = 0;
+      let urls = [];
+      for (let i=0; i<files.length; i++) {
+        const file = files[i];
+        const url = signedUrls[i].split('?')[0];
+        const options = {
+          headers: { 'Content-Type': file.type },
+          onUploadProgress: (e) => {
+            this.setState(update(this.state, {
+              progress: {
+                [i]: {
+                  $set: e.loaded / e.total * 100
+                }
+              }
+            }));
+          }
+        };
+        axios.put(signedUrls[i], this.state.files[i], options).then(resp => {
+          complete += 1;
+          urls.push(url);
+          this.setState({ uploading: false });
+          if (complete === files.length) this.props.onComplete(urls);
+        }).catch(err => {
+          complete += 1;
+          console.error(err);
+          this.setState({ uploading: false });
+          if (complete === files.length) this.props.onComplete(urls);
+        });
+      }
+    }).catch(err => {
+      console.error(err);
+      this.setState({ uploading: false });
     });
-    // for (let i=0; i<files.length; i++) {
-    //   const file = files[i];
-    //
-    //   const filetype = file.type;
-    //   const url = `https://olwisconse.s3.amazonaws.com/${filename}`;
-    //   this.props.getSignedUrls(filename, filetype).then(({ data }) => {
-    //     const options = {
-    //       headers: { 'Content-Type': filetype },
-    //       onUploadProgress: (e) => {
-    //         this.setState(update(this.state, {
-    //           progress: {
-    //             [i]: {
-    //               $set: e.loaded / e.total * 100
-    //             }
-    //           }
-    //         }));
-    //       }
-    //     };
-    //     return axios.put(data.getSignedUrl, file, options);
-    //   }).then(resp => {
-    //     urls.push(url);
-    //     complete += 1;
-    //     if (complete === files.length) console.log(urls);
-    //   }).catch(error => {
-    //     complete += 1;
-    //     if (complete === files.length) console.log(urls);
-    //     console.error(error);
-    //   });
-    // }
   }
 
   render() {
     return (
-      <div className={styles.backdrop}>
-        <div className={styles.container}>
+      <div
+        className={styles.backdrop}
+        style={{display: this.props.open ? 'flex' : 'none'}}
+        onClick={ this.state.uploading ? null : this.props.onCloseRequest }
+      >
+        <div className={styles.container} onClick={e => e.stopPropagation()}>
           <Dropzone onDrop={this.onDrop} className={styles.dropzone}>
             {this.state.files.map((file, idx) => (
               <ImagePreview
@@ -98,7 +104,9 @@ class ImageUploader extends Component {
             { !this.state.files.length && <UploadIcon /> }
           </Dropzone>
           <span className={styles.divider} />
-          <button className={styles.button} onClick={this.upload}>Upload</button>
+          <button className={styles.button} onClick={this.upload} disabled={this.state.uploading}>
+            { this.state.uploading ? 'Uploading...' : 'Upload' }
+          </button>
         </div>
       </div>
     );

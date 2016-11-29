@@ -44,6 +44,7 @@ const PROFILE_QUERY = gql`query CurrentUser {
     username
     displayName
     profilePicture {
+      id
       url
     }
   }

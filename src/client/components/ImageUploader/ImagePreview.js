@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './style.css';
 import Close from 'react-icons/lib/md/close';
+import Check from 'react-icons/lib/md/check';
 
 const ImagePreview = ({ src, onRemove, progress }) => (
   <div className={styles.preview}>
@@ -12,9 +13,13 @@ const ImagePreview = ({ src, onRemove, progress }) => (
       <img src={src} className={styles.image} />
       { progress && (
         <div className={styles.previewOverlay}>
-          <div className={styles.progressContainer}>
-            <div className={styles.progressBar} style={{width: `${progress}%`}}/>
-          </div>
+          { progress === 100 ? (
+            <Check />
+          ) : (
+            <div className={styles.progressContainer}>
+              <div className={styles.progressBar} style={{width: `${progress}%`}}/>
+            </div>
+          )}
         </div>
       )}
   </div>

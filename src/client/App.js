@@ -39,6 +39,10 @@ const query = gql`query CurrentUser {
   currentUser {
     id
     username
+    profilePicture {
+      id
+      url
+    }
   }
 }`;
 
