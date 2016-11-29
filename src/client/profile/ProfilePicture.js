@@ -33,7 +33,12 @@ class ProfilePicture extends Component {
     return (
       <div className={styles.profilePicture} style={{backgroundImage: `url(${src})`}}>
         <div className={styles.profilePictureInner}>View</div>
-        <UploadButton className={styles.profilePictureInner} onComplete={this.update}>
+        <UploadButton
+          className={styles.profilePictureInner}
+          onComplete={this.update}
+          accept="image/*"
+          multiple={false}
+        >
           Edit
         </UploadButton>
       </div>

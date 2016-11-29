@@ -26,11 +26,19 @@ class UploadButton extends Component {
   }
 
   render() {
-    const { onComplete, getSignedUrls,  children, ...props } = this.props;
+    const {
+      onComplete,
+      getSignedUrls,
+      children,
+      accept,
+      multiple,
+      ...props } = this.props;
     return (
       <div  {...props} onClick={this.setOpen(true)}>
         {children}
         <ImageUploader
+          accept={accept}
+          multiple={multiple}
           getSignedUrls={getSignedUrls}
           onComplete={this.onComplete}
           open={this.state.open}

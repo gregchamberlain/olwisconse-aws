@@ -10,7 +10,10 @@ const ImageList = ({ images, onUploadComplete }) => (
     {images.map(image => (
       <ImageListItem key={image.id} image={image} />
     ))}
-    <UploadButton className={styles.item} onComplete={onUploadComplete}>
+    <UploadButton
+      accept="image/*"
+      className={styles.item}
+      onComplete={onUploadComplete}>
       <Add />
     </UploadButton>
   </div>

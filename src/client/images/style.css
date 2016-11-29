@@ -6,11 +6,11 @@
 }
 
 :local .item {
-  width: 148px;
-  height: 148px;
+  width: 206px;
+  height: 206px;
   background-color: #ccc;
   border-radius: 5px;
-  margin: 1px;
+  margin: 2px;
   display: flex;
   align-items: center;
   justify-content: center;

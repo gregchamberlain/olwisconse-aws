@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Dropzone from 'react-dropzone';
 import update from 'immutability-helper';
 import axios from 'axios';
@@ -102,6 +102,9 @@ class ImageUploader extends Component {
   }
 
   render() {
+
+    const { multiple, accept } = this.props;
+
     return (
       <div
         className={styles.backdrop}
@@ -109,7 +112,12 @@ class ImageUploader extends Component {
         onClick={ this.state.uploading ? null : this.requestClose }
       >
         <div className={styles.container} onClick={e => e.stopPropagation()}>
-          <Dropzone onDrop={this.onDrop} className={styles.dropzone}>
+          <Dropzone
+            multiple={multiple}
+            accept={accept}
+            onDrop={this.onDrop}
+            className={styles.dropzone}
+          >
             {this.state.files.map((file, idx) => (
               <ImagePreview
                 key={file.preview}
@@ -118,7 +126,13 @@ class ImageUploader extends Component {
                 onRemove={this.removeFile(idx)}
               />
             ))}
-            { !this.state.files.length && <UploadIcon /> }
+            { !this.state.files.length && (
+              <div className={styles.instructions}>
+                <UploadIcon className={styles.icon}/>
+                <div>Drop files here</div>
+                <div><small>or click to select files</small></div>
+              </div>
+            ) }
           </Dropzone>
           <span className={styles.divider} />
           <button className={styles.button} onClick={this.upload} disabled={this.state.uploading}>
@@ -129,5 +143,14 @@ class ImageUploader extends Component {
     );
   }
 }
+
+ImageUploader.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onComplete: PropTypes.func,
+  onCloseRequest: PropTypes.func,
+  getSignedUrls: PropTypes.func.isRequired,
+  multiple: PropTypes.bool,
+  accept: PropTypes.string,
+};
 
 export default ImageUploader;
