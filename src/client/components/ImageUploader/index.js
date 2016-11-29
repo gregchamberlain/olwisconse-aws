@@ -18,6 +18,12 @@ class ImageUploader extends Component {
     };
   }
 
+  componentWillReceiveProps(props) {
+    if (!this.props.open && props.open) {
+      this.setState({ files: [], progress: [], uploading: false });
+    }
+  }
+
   onDrop = (acceptedFiles, rejectedFiles) => {
     if (acceptedFiles.length) {
       this.setState(update(this.state, {
@@ -84,12 +90,22 @@ class ImageUploader extends Component {
     });
   }
 
+  requestClose = () => {
+    if (this.state.files.length) {
+      if (!this.state.progress.length && confirm('Exit without uploading images?')) {
+        this.props.onCloseRequest();
+      }
+    } else {
+      this.props.onCloseRequest();
+    }
+  }
+
   render() {
     return (
       <div
         className={styles.backdrop}
         style={{display: this.props.open ? 'flex' : 'none'}}
-        onClick={ this.state.uploading ? null : this.props.onCloseRequest }
+        onClick={ this.state.uploading ? null : this.requestClose }
       >
         <div className={styles.container} onClick={e => e.stopPropagation()}>
           <Dropzone onDrop={this.onDrop} className={styles.dropzone}>
