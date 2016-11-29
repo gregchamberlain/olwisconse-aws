@@ -5,3 +5,25 @@
   background-position: center;
   background-size: cover;
 }
+
+:local .profilePicture:hover .profilePictureInner {
+  display: flex;
+}
+
+:local .profilePictureInner {
+  height: 50%;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.2);
+  align-items: center;
+  justify-content: center;
+  display: none;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+
+:local .profilePictureInner:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}

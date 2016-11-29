@@ -1,6 +1,8 @@
 import { User, Location, Quote, Image } from '../models';
 import { generateSessionToken } from '../utils';
 import bcrypt from 'bcrypt';
+import aws from 'aws-sdk';
+const s3 = new aws.S3();
 
 const resolveFunctions = {
   User: {
@@ -85,6 +87,28 @@ const resolveFunctions = {
       req.user.profilePicture = image.id;
       await req.user.save();
       return image;
+    },
+    getSignedUrl(_, { filename, filetype}) {
+      const params = {
+        Bucket: 'olwisconse',
+        Key: filename,
+        Expires: 60,
+        ContentType: filetype,
+        ACL: 'public-read'
+      };
+      return s3.getSignedUrl('putObject', params);
+    },
+    getSignedUrls(_, { files }) {
+      return files.map(file => {
+        const params = {
+          Bucket: 'olwisconse',
+          Key: file.name,
+          Expires: 60,
+          ContentType: file.type,
+          ACL: 'public-read'
+        };
+        return s3.getSignedUrl('putObject', params);
+      });
     },
     createLocation(_, { location }) {
       return Location.create(location);

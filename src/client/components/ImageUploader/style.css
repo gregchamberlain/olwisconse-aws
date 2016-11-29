@@ -1,0 +1,115 @@
+:local .backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:local .container {
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
+  padding: 10px;
+  width: 50vw;
+  height: 75vh;
+  color: #4CAF50;
+}
+
+:local .dropzone {
+  font-size: 60px;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: auto;
+}
+
+:local .preview {
+  position: relative;
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  /*padding: 10px;*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ccc;
+  border-radius: 5px;
+}
+
+:local .previewOverlay {
+  border-radius: 5px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+:local .progressContainer {
+  width: 90%;
+  height: 30px;
+  border-radius: 15px;
+  border: 2px solid #4CAF50;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
+:local .progressBar {
+  height: 20px;
+  border-radius: 10px;
+  background-color: #4CAF50;
+}
+
+:local .image {
+  max-height: 150px;
+  max-width: 150px;
+  /*box-shadow: 0 0 10px #666;*/
+}
+
+:local .remove {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  color: #eee;
+  background-color: #F44336;
+  border-radius: 50%;
+}
+
+:local .divider {
+  width: 90%;
+  height: 2px;
+  margin: 10px 0;
+  background-color: #4CAF50;
+}
+
+:local .button {
+  margin: 15px;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  color: #4CAF50;
+  border: none;
+  outline: none;
+}

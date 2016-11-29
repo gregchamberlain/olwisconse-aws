@@ -59,10 +59,17 @@ input QuoteInput {
   location: String
 }
 
+input FileInput {
+  name: String!
+  type: String!
+}
+
 type Mutation {
   signup(user: UserInput!): User
   login(user: UserInput!): User
   logout: User
+  getSignedUrl(filename: String!, filetype: String!): String
+  getSignedUrls(files: [FileInput]!): [String]
   updateProfilePicture(url: String!): Image
   createLocation(location: LocationInput!): Location
   createQuote(quote: QuoteInput!): Quote
