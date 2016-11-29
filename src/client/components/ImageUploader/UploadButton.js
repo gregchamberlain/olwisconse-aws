@@ -14,7 +14,9 @@ class UploadButton extends Component {
   }
 
   setOpen = bool => e => {
-    e.stopPropagation();
+    if (e && e.stopPropagation) {
+      e.stopPropagation();
+    }
     this.setState({ open: bool });
   }
 
