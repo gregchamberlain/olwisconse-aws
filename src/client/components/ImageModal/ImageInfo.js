@@ -6,24 +6,26 @@ import Group from 'react-icons/lib/md/group';
 import UserItem from '../UserItem';
 import styles from './style.css';
 
-const ImageInfo = ({ image, onCloseRequest }) => (
+const ImageInfo = ({ image, onCloseRequest, onEditRequest }) => (
   <div>
     <div className={styles.caption}>
       {image.caption || 'Add A Caption'}
     </div>
     <div className={styles.caption}>
-      <Place /> { image.location ? (
+      <div className={styles.title}><Place /> Location</div>
+      { image.location ? (
         <Link to={`/locations/${image.location.id}`} onClick={onCloseRequest}>
           {image.location.name}
         </Link>
-      ) : "Add a location"}
+      ) : <div className={styles.suggest} onClick={onEditRequest}>Add a location</div>}
     </div>
     <div className={styles.caption}>
-      <Group /> { image.people.length ? (
+      <div className={styles.title}><Group /> People</div>
+      { image.people.length ? (
         image.people.map(person => (
           <UserItem key={person.id} user={person} onClick={onCloseRequest}/>
         ))
-      ) : 'Tag People in this Photo'}
+      ) : <div className={styles.suggest} onClick={onEditRequest}>Tag People</div>}
     </div>
   </div>
 );

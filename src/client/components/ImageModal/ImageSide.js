@@ -48,7 +48,11 @@ class ImageSide extends Component {
         <div style={{ padding: 15 }}>
           { this.state.editing ?
             <ImageForm image={image} /> :
-            <ImageInfo image={image} onCloseRequest={onCloseRequest}/>
+            <ImageInfo
+              image={image}
+              onCloseRequest={onCloseRequest}
+              onEditRequest={this.startEditing}
+            />
           }
         </div>
         <button onClick={this.startEditing}>Edit</button>

@@ -10,8 +10,8 @@ const UserItem = ({ user, onClick }) => (
       style={{ backgroundImage: `url(${user.profilePicture.url})`}}
     /> }
     <div>
-      <div>{user.displayName}</div>
-      <div>@{user.username}</div>
+      <div className={styles.displayName}>{user.displayName}</div>
+      <div className={styles.username}>@{user.username}</div>
     </div>
   </Link>
 );
