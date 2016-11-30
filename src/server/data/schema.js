@@ -5,6 +5,7 @@ type User {
   username: String!
   displayName: String!
   quotes: [Quote]
+  images: [Image]
 }
 
 type Image {
@@ -21,6 +22,7 @@ type Location {
   id: ID!
   name: String!
   quotes: [Quote]
+  images: [Image]
   createdAt: String
   updatedAt: String
 }

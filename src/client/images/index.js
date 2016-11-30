@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import update from 'immutability-helper';
 
 import ImageList from './ImageList';
-import ImageFragment from '../graphql/ImageFragment';
+import ImageFragment from '../graphql/ImageFragment.gql';
 
 const ImageIndex = ({ data, create }) => data.loading ? <h1>Loading...</h1> : (
   <div>

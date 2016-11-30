@@ -7,14 +7,16 @@ import ImageListItem from './ImageListItem';
 import { openModal, closeModal } from '../redux/actions/uploadModal';
 import * as IMAGE_MODAL_ACTION from '../redux/actions/imageModal';
 
-const ImageList = ({ images, openUploader, openImage }) => (
+const ImageList = ({ images, openUploader, openImage, onUploadComplete }) => (
   <div className={styles.list}>
     {images.map((image, index) => (
       <ImageListItem key={image.id} image={image} onClick={openImage(index)}/>
     ))}
-    <div className={styles.item} onClick={openUploader}>
-      <Add />
-    </div>
+    { onUploadComplete && (
+      <div className={styles.item} onClick={openUploader}>
+        <Add />
+      </div>
+    )}
   </div>
 );
 

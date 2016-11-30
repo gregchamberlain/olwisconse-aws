@@ -9,7 +9,7 @@ import Close from 'react-icons/lib/md/close';
 import Check from 'react-icons/lib/md/check';
 
 import styles from './style.css';
-import ImageFragment from '../../graphql/ImageFragment';
+import ImageFragment from '../../graphql/ImageFragment.gql';
 
 
 class ImageForm extends Component {

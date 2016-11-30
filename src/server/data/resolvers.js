@@ -15,11 +15,17 @@ const resolveFunctions = {
       } else {
         return null;
       }
+    },
+    images({ id }) {
+      return Image.find({ people: id });
     }
   },
   Location: {
     quotes({ id }) {
       return Quote.find({ location: id });
+    },
+    images({ id }) {
+      return Image.find({ location: id });
     }
   },
   Quote: {
