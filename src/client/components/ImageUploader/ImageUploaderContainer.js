@@ -1,4 +1,4 @@
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
 import { connect } from 'react-redux';
@@ -21,12 +21,23 @@ const GET_SIGNED_URLS = gql`mutation GetSignedUrls($files: [FileInput]!) {
   getSignedUrls(files: $files)
 }`;
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)(ImageUploader);
+// const withConnect = (ImageUploader);
 
-export default graphql(GET_SIGNED_URLS, {
-  props: ({ mutate }) => ({
-    getSignedUrls: (files) => mutate({
-      variables: { files }
+export default compose(
+  graphql(GET_SIGNED_URLS, {
+    props: ({ mutate }) => ({
+      getSignedUrls: (files) => mutate({
+        variables: { files }
+      })
     })
-  })
-})(withConnect);
+  }),
+  connect(mapStateToProps, mapDispatchToProps)
+)(ImageUploader);
+
+// export default graphql(GET_SIGNED_URLS, {
+//   props: ({ mutate }) => ({
+//     getSignedUrls: (files) => mutate({
+//       variables: { files }
+//     })
+//   })
+// })(withConnect);

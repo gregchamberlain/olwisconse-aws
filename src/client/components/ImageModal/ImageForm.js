@@ -106,7 +106,7 @@ class ImageForm extends Component {
 
     const { image } = this.state;
 
-    if (data.loading) return <div>'loading'</div>;
+    if (data.loading) return <div>Loading</div>;
 
     return (
       <div>

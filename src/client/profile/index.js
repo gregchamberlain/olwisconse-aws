@@ -3,6 +3,7 @@ import { graphql, withApollo } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import ProfilePicture from './ProfilePicture';
+import currentUserQuery from '../graphql/currentUser.gql';
 
 const Profile = ({ data, mutate, client }) => {
 
@@ -29,26 +30,4 @@ const LOGOUT_MUTATION = gql`mutation Logout {
   }
 }`;
 
-const PROFILE_QUERY = gql`query CurrentUser {
-  currentUser {
-    id
-    username
-    displayName
-    profilePicture {
-      id
-      url,
-      createdAt
-      owner {
-        id
-        username
-        displayName
-        profilePicture {
-          id,
-          url
-        }
-      }
-    }
-  }
-}`;
-
-export default withApollo(graphql(PROFILE_QUERY)(graphql(LOGOUT_MUTATION)(Profile)));
+export default withApollo(graphql(currentUserQuery)(graphql(LOGOUT_MUTATION)(Profile)));

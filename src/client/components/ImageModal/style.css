@@ -58,6 +58,7 @@
 
 :local .ownerName {
   text-decoration: none;
+  color: #4CAF50;
 }
 
 :local .caption {
@@ -114,4 +115,5 @@
 
 :local .info {
   width: 300px;
+  overflow: auto;
 }

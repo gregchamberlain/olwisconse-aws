@@ -10,7 +10,7 @@ import styles from './style.css';
 const ImageInfo = ({ image, onCloseRequest, onEditRequest }) => (
   <div>
     <div className={styles.caption}>
-      {image.caption || 'Add A Caption'}
+      {image.caption || <div className={styles.suggest} onClick={onEditRequest}>Add a caption</div>}
     </div>
     <div className={styles.caption}>
       <div className={styles.title}><Place /> Location</div>

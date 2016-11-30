@@ -49,7 +49,7 @@ class ImageSide extends Component {
             </div>
           </div>
         </div>
-        <div style={{ padding: '15px 25px' }}>
+        <div style={{ padding: '15px 25px', overflow: 'auto' }}>
           { this.state.editing ?
             <ImageForm
               image={image}

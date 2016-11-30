@@ -1,0 +1,21 @@
+query CurrentUser {
+  currentUser {
+    id
+    username
+    displayName
+    profilePicture {
+      id
+      url,
+      createdAt
+      owner {
+        id
+        username
+        displayName
+        profilePicture {
+          id,
+          url
+        }
+      }
+    }
+  }
+}

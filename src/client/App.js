@@ -3,6 +3,8 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { HashRouter, Match, Link } from 'react-router';
 
+import currentUserQuery from './graphql/currentUser.gql';
+
 import Toolbar from './components/Toolbar';
 import ImageUploader from './components/ImageUploader/ImageUploaderContainer';
 import ImageModal from './components/ImageModal/ImageModalContainer';
@@ -41,16 +43,4 @@ const App = ({ data }) => data.loading ? <div>Loading...</div> : (
   )
 );
 
-const query = gql`query CurrentUser {
-  currentUser {
-    id
-    username
-    displayName
-    profilePicture {
-      id
-      url
-    }
-  }
-}`;
-
-export default graphql(query)(App);
+export default graphql(currentUserQuery)(App);

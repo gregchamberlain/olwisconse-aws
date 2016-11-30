@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 
 import styles from './style.css';
 import iconSrc from '../../assets/icon.png';
+import currentUserQuery from '../../graphql/currentUser.gql';
 
 const Toolbar = ({ data }) => (
   <div className={styles.toolbar}>
@@ -25,16 +26,4 @@ const Toolbar = ({ data }) => (
   </div>
 );
 
-const PROFILE_QUERY = gql`query CurrentUser {
-  currentUser {
-    id
-    username
-    displayName
-    profilePicture {
-      id
-      url
-    }
-  }
-}`;
-
-export default graphql(PROFILE_QUERY)(Toolbar);
+export default graphql(currentUserQuery)(Toolbar);

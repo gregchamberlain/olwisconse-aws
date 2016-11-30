@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
 
@@ -19,7 +19,17 @@ const ProfilePicture = ({ image, openUploader, openImage }) => (
 const MUTATION = gql`mutation UpdateProfilePicture($url: String!){
   updateProfilePicture(url: $url) {
     id
-    url
+    url,
+    createdAt
+    owner {
+      id
+      username
+      displayName
+      profilePicture {
+        id,
+        url
+      }
+    }
   }
 }`;
 
@@ -34,24 +44,47 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   openImage: () => dispatch(IMAGE_MODAL_ACTIONS.openModal([ownProps.image], 0))
 });
 
-const withConnect = connect(null, mapDispatchToProps)(ProfilePicture);
+// const withConnect = ;
 
-export default graphql(MUTATION, {
-  props: ({ mutate }) => ({
-    update: (url) => mutate({
-      variables: { url },
-      updateQueries: {
-        CurrentUser: (prev, { mutationResult }) => {
-          const profilePicture = mutationResult.data.updateProfilePicture;
-          return update(prev, {
-            currentUser: {
-              profilePicture: {
-                $set: profilePicture
+
+export default compose(
+  graphql(MUTATION, {
+    props: ({ mutate }) => ({
+      update: (url) => mutate({
+        variables: { url },
+        updateQueries: {
+          CurrentUser: (prev, { mutationResult }) => {
+            const profilePicture = mutationResult.data.updateProfilePicture;
+            return update(prev, {
+              currentUser: {
+                profilePicture: {
+                  $set: profilePicture
+                }
               }
-            }
-          });
+            });
+          }
         }
-      }
+      })
     })
-  })
-})(withConnect);
+  }),
+  connect(null, mapDispatchToProps)
+)(ProfilePicture);
+// export default graphql(MUTATION, {
+//   props: ({ mutate }) => ({
+//     update: (url) => mutate({
+//       variables: { url },
+//       updateQueries: {
+//         CurrentUser: (prev, { mutationResult }) => {
+//           const profilePicture = mutationResult.data.updateProfilePicture;
+//           return update(prev, {
+//             currentUser: {
+//               profilePicture: {
+//                 $set: profilePicture
+//               }
+//             }
+//           });
+//         }
+//       }
+//     })
+//   })
+// })(withConnect);
