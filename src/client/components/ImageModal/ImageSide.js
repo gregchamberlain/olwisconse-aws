@@ -25,6 +25,10 @@ class ImageSide extends Component {
     this.setState({ editing: true });
   }
 
+  stopEditing = () => {
+    this.setState({ editing: false });
+  }
+
   render() {
     const { image, onCloseRequest } = this.props;
     return (
@@ -45,9 +49,12 @@ class ImageSide extends Component {
             </div>
           </div>
         </div>
-        <div style={{ padding: 15 }}>
+        <div style={{ padding: '15px 25px' }}>
           { this.state.editing ?
-            <ImageForm image={image} /> :
+            <ImageForm
+              image={image}
+              onStopEditRequest={this.stopEditing}
+            /> :
             <ImageInfo
               image={image}
               onCloseRequest={onCloseRequest}
@@ -55,7 +62,6 @@ class ImageSide extends Component {
             />
           }
         </div>
-        <button onClick={this.startEditing}>Edit</button>
       </div>
     );
   }

@@ -5,6 +5,8 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
 import { isEqual } from 'lodash';
+import Close from 'react-icons/lib/md/close';
+import Check from 'react-icons/lib/md/check';
 
 import styles from './style.css';
 import ImageFragment from '../../graphql/ImageFragment';
@@ -100,7 +102,7 @@ class ImageForm extends Component {
   }
 
   render() {
-    const { onCloseRequest, data } = this.props;
+    const { onCloseRequest, onStopEditRequest, data } = this.props;
 
     const { image } = this.state;
 
@@ -128,7 +130,15 @@ class ImageForm extends Component {
         ))}
         <button onClick={this.addPerson}>Add Person</button>
         <hr />
-        <button onClick={this.save}>Update</button>
+        <div style={{display: 'flex'}}>
+            <div className={styles.edit} onClick={onStopEditRequest} style={{color: '#F44336'}}>
+              <Close />&nbsp;Cancel
+            </div>
+            <div className="spacer" />
+            <div className={styles.edit} onClick={this.save} style={{color: '#4CAF50'}}>
+              <Check />&nbsp;Update
+            </div>
+        </div>
       </div>
     );
   }

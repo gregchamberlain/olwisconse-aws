@@ -17,12 +17,24 @@
   padding-bottom: 5px;
 }
 
+:local .edit {
+  font-size: 14px;
+  background-color: #eee;
+  color: #444;
+  padding: 5px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 14px;
+  text-align: center;
+}
+
 :local .suggest {
   background-color: #eee;
   font-size: 14px;
   height: 28px;
   border-radius: 14px;
-  margin: 5px 10px;
+  margin: 5px 0px;
   padding: 5px;
   cursor: pointer;
   text-align: center;

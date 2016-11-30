@@ -18,6 +18,8 @@ class ImageModal extends Component {
 
   handleKeyPress = e => {
     const { prev, next } = this.props;
+    const overrides = ['textarea', 'input'];
+    if (overrides.includes(e.target.localName) || !this.props.open) return;
     if (e.keyCode === 37) { prev(); e.preventDefault(); }
     if (e.keyCode === 39) { next(); e.preventDefault(); }
   }

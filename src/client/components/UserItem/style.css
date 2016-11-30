@@ -1,5 +1,5 @@
 :local .container {
-  margin: 5px 10px;
+  margin: 5px 0px;
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -7,6 +7,10 @@
   background: #eee;
   border-radius: 21px;
   padding: 5px;
+}
+
+:local .test {
+  border: 1px solid purple;
 }
 
 :local .icon {
