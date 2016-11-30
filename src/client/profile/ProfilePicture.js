@@ -5,12 +5,13 @@ import gql from 'graphql-tag';
 import update from 'immutability-helper';
 
 import { openModal, closeModal } from '../redux/actions/uploadModal';
+import * as IMAGE_MODAL_ACTIONS from '../redux/actions/imageModal';
 import styles from './style.css';
 import { UploadButton } from '../components/ImageUploader';
 
-const ProfilePicture = ({ image, openUploader }) => (
+const ProfilePicture = ({ image, openUploader, openImage }) => (
   <div className={styles.profilePicture} style={{backgroundImage: `url(${image.url})`}}>
-    <div className={styles.profilePictureInner}>View</div>
+    <div className={styles.profilePictureInner} onClick={openImage}>View</div>
     <div className={styles.profilePictureInner} onClick={openUploader}>Edit</div>
   </div>
 );
@@ -30,7 +31,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     },
     { multiple: false }
   )),
-  openImage: () => dispatch
+  openImage: () => dispatch(IMAGE_MODAL_ACTIONS.openModal([ownProps.image], 0))
 });
 
 const withConnect = connect(null, mapDispatchToProps)(ProfilePicture);

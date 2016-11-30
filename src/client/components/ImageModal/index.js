@@ -17,12 +17,12 @@ class ImageModal extends Component {
 
   handleKeyPress = e => {
     const { prev, next } = this.props;
-    if (e.keyCode === 37) prev(); e.preventDefault();
-    if (e.keyCode === 39) next(); e.preventDefault();
+    if (e.keyCode === 37) { prev(); e.preventDefault(); }
+    if (e.keyCode === 39) { next(); e.preventDefault(); }
   }
 
   render() {
-    const { image, next, prev, onCloseRequest, open } = this.props;
+    const { image, next, prev, onCloseRequest, open, hasNext, hasPrev } = this.props;
     return (
       <Modal open={open} onCloseRequest={onCloseRequest}>
         <div className={styles.container}>
@@ -32,13 +32,17 @@ class ImageModal extends Component {
               style={{backgroundImage: `url(${image.url})`}}
             />
             <div className={styles.displayOverlay}>
-              <div className={styles.navButton} onClick={prev}>
-                <Left />
-              </div>
+              { hasPrev ? (
+                <div className={styles.navButton} onClick={prev}>
+                  <Left />
+                </div>
+              ) : null }
               <div className={styles.spacer}/>
-              <div className={styles.navButton} onClick={next}>
-                <Right />
-              </div>
+              { hasNext ? (
+                <div className={styles.navButton} onClick={next}>
+                  <Right />
+                </div>
+              ) : null }
             </div>
           </div>
           <div className={styles.info}>
