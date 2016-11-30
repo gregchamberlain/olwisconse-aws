@@ -25,6 +25,16 @@ const resolveFunctions = {
   Quote: {
     location({ location }) {
       return Location.findById(location);
+    },
+    owner({ owner }) {
+      if (!owner) return null;
+      return User.findById(owner);
+    }
+  },
+  Image: {
+    owner({ owner }) {
+      if (!owner) return null;
+      return User.findById(owner);
     }
   },
   Phrase: {
@@ -61,6 +71,7 @@ const resolveFunctions = {
       const passwordDigest = bcrypt.hashSync(user.password, salt);
       return User.create({
         username: user.username,
+        displayName: user.displayName,
         passwordDigest,
         sessionToken: ( Math.floor( Math.random() * 100000 ) ).toString() }
       );
@@ -86,7 +97,7 @@ const resolveFunctions = {
       }
     },
     async updateProfilePicture(_, { url }, { req }) {
-      const image = await Image.create({ url, people: [req.user.id]});
+      const image = await Image.create({ url, people: [req.user.id], owner: req.user.id });
       req.user.profilePicture = image.id;
       await req.user.save();
       return image;
@@ -116,11 +127,11 @@ const resolveFunctions = {
     createLocation(_, { location }) {
       return Location.create(location);
     },
-    createQuote(_, { quote }) {
-      return Quote.create(quote);
+    createQuote(_, { quote }, { req }) {
+      return Quote.create({ ...quote, owner: req.user.id });
     },
-    createImages(_, { urls }) {
-      const images = urls.map(url => ({ url }));
+    createImages(_, { urls }, { req }) {
+      const images = urls.map(url => ({ url, owner: req.user.id }));
       return Image.insertMany(images);
     }
   }

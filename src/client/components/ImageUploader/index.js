@@ -102,12 +102,11 @@ class ImageUploader extends Component {
   }
 
   render() {
-
-    const { multiple, accept } = this.props;
+    const { multiple, accept, open } = this.props;
 
     return (
-      <Modal onCloseRequest={this.requestClose} open={this.props.open}>
-        <div className={styles.container} onClick={e => e.stopPropagation()}>
+      <Modal onCloseRequest={this.requestClose} open={open}>
+        <div className={styles.container}>
           <Dropzone
             multiple={multiple}
             accept={accept}

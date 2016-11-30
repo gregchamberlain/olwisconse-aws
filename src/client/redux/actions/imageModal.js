@@ -1,5 +1,5 @@
-export const OPEN_MODAL = 'OPEN_MODAL';
-export const CLOSE_MODAL = 'CLOSE_MODAL';
+export const OPEN_MODAL = 'OPEN_IMAGE_MODAL';
+export const CLOSE_MODAL = 'CLOSE_IMAGE_MODAL';
 export const NEXT_IMAGE = 'NEXT_IMAGE';
 export const PREV_IMAGE = 'PREV_IMAGE';
 

@@ -17,9 +17,7 @@ class Login extends Component {
   submit = e => {
     e.preventDefault();
     const { errors, ...user } = this.state;
-    this.props.login(user).then(({ data }) => {
-      console.log('yay!', data);
-    }).catch(err => {
+    this.props.login(user).catch(err => {
       this.setState({ errors: err.graphQLErrors });
     });
   }

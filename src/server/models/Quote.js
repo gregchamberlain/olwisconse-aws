@@ -5,6 +5,7 @@ const QuoteSchema = new mongoose.Schema({
     sentence: { type: String, required: true },
     person: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   }],
+  owner: {type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   location: { type: mongoose.Schema.Types.ObjectId, ref: 'Location' },
 }, {
   timestamps: true

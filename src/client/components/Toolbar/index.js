@@ -16,8 +16,12 @@ const Toolbar = ({ data }) => (
     <Link to="/locations" className={styles.toolbarItem}>Locations</Link>
     <Link to="/quotes" className={styles.toolbarItem}>Quotes</Link>
     <Link to="/images" className={styles.toolbarItem}>Images</Link>
-    <Link to="/profile" className={styles.userIcon} style={{backgroundImage: `url(${data.currentUser.profilePicture.url})`}}>
-    </Link>
+    { data.currentUser.profilePicture ? (
+      <Link to="/profile" className={styles.userIcon} style={{backgroundImage: `url(${data.currentUser.profilePicture.url})`}}>
+      </Link>
+    ) : (
+      <Link to="/profile" className={styles.toolbarItem}>{data.currentUser.displayName}</Link>
+    )}
   </div>
 );
 

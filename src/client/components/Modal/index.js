@@ -20,11 +20,11 @@ class Modal extends Component {
   }
 
   render() {
-    const { children, open } = this.props;
+    const { children, open, onCloseRequest } = this.props;
     if (!open) return null;
     return (
-      <div className={styles.backdrop} onClick={this.props.onCloseRequest}>
-        <div className={styles.close} onClick={this.props.onCloseRequest}><Close /></div>
+      <div className={styles.backdrop} onClick={onCloseRequest}>
+        <div className={styles.close} onClick={onCloseRequest}><Close /></div>
         <div onClick={e => e.stopPropagation()}>
           {children}
         </div>

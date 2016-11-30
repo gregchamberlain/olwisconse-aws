@@ -10,18 +10,24 @@ type User {
 type Image {
   id: ID!
   url: String!
+  owner: User
+  createdAt: String
+  updatedAt: String
 }
 
 type Location {
   id: ID!
   name: String!
   quotes: [Quote]
+  createdAt: String
+  updatedAt: String
 }
 
 type Quote {
   id: ID!
   phrases: [Phrase]
   location: Location
+  owner: User
   createdAt: String
   updatedAt: String
 }
@@ -43,6 +49,7 @@ type Query {
 
 input UserInput {
   username: String!
+  displayName: String
   password: String!
 }
 
