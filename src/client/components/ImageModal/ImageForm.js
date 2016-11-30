@@ -5,7 +5,10 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import update from 'immutability-helper';
 import { isEqual } from 'lodash';
+
 import styles from './style.css';
+import ImageFragment from '../../graphql/ImageFragment';
+
 
 class ImageForm extends Component {
 
@@ -149,19 +152,11 @@ const QUERIES = gql`query {
 
 const UPDATE_IMAGE = gql`mutation UpdateImage($image: ImageInput!) {
   updateImage(image: $image) {
-    id
-    url
-    location {
-      id
-      name
-    }
-    people {
-      id
-      username
-      displayName
-    }
+    ...ImageFragment
   }
-}`;
+}
+${ImageFragment}
+`;
 
 
 const mut = graphql(UPDATE_IMAGE, {

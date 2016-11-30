@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import Place from 'react-icons/lib/md/place';
 import Group from 'react-icons/lib/md/group';
 
+import UserItem from '../UserItem';
 import styles from './style.css';
 
 const ImageInfo = ({ image, onCloseRequest }) => (
@@ -20,9 +21,7 @@ const ImageInfo = ({ image, onCloseRequest }) => (
     <div className={styles.caption}>
       <Group /> { image.people.length ? (
         image.people.map(person => (
-          <Link key={person.id} to={`/members/${person.username}`} onClick={onCloseRequest}>
-            {person.displayName}
-          </Link>
+          <UserItem key={person.id} user={person} onClick={onCloseRequest}/>
         ))
       ) : 'Tag People in this Photo'}
     </div>

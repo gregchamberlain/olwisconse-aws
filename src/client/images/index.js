@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import update from 'immutability-helper';
 
 import ImageList from './ImageList';
+import ImageFragment from '../graphql/ImageFragment';
 
 const ImageIndex = ({ data, create }) => data.loading ? <h1>Loading...</h1> : (
   <div>
@@ -14,55 +15,19 @@ const ImageIndex = ({ data, create }) => data.loading ? <h1>Loading...</h1> : (
 
 const IMAGES_QUERY = gql`query Images {
   images {
-    id
-    url
-    location {
-      id
-      name
-    }
-    people {
-      id
-      username
-      displayName
-    }
-    createdAt
-    owner {
-      id
-      username
-      displayName
-      profilePicture {
-        id
-        url
-      }
-    }
+    ...ImageFragment
   }
-}`;
+}
+  ${ImageFragment}
+`;
 
 const CREATE_IMAGES = gql`mutation CreateImage($urls: [String]!) {
   createImages(urls: $urls) {
-    id
-    url
-    location {
-      id
-      name
-    }
-    people {
-      id
-      username
-      displayName
-    }
-    createdAt
-    owner {
-      id
-      username
-      displayName
-      profilePicture {
-        id
-        url
-      }
-    }
+    ...ImageFragment
   }
-}`;
+}
+${ImageFragment}
+`;
 
 const mut = graphql(CREATE_IMAGES, {
   props: ({ mutate }) => ({
