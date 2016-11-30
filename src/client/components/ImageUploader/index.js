@@ -6,7 +6,7 @@ import UploadIcon from 'react-icons/lib/md/cloud-upload';
 
 import styles from './style.css';
 import ImagePreview from './ImagePreview';
-export UploadButton from './UploadButton';
+import Modal from '../Modal';
 
 class ImageUploader extends Component {
 
@@ -106,11 +106,7 @@ class ImageUploader extends Component {
     const { multiple, accept } = this.props;
 
     return (
-      <div
-        className={styles.backdrop}
-        style={{display: this.props.open ? 'flex' : 'none'}}
-        onClick={ this.state.uploading ? null : this.requestClose }
-      >
+      <Modal onCloseRequest={this.requestClose} open={this.props.open}>
         <div className={styles.container} onClick={e => e.stopPropagation()}>
           <Dropzone
             multiple={multiple}
@@ -139,7 +135,7 @@ class ImageUploader extends Component {
             { this.state.uploading ? 'Uploading...' : 'Upload' }
           </button>
         </div>
-      </div>
+      </Modal>
     );
   }
 }
