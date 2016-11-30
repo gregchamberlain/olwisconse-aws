@@ -13,7 +13,7 @@ const Profile = ({ data, mutate, client }) => {
       console.error('Failed Logout', err);
     });
   };
-  
+
   return data.loading ? <div>Loading...</div> : (
     <div>
       <ProfilePicture image={data.currentUser.profilePicture || {}}/>
@@ -36,7 +36,17 @@ const PROFILE_QUERY = gql`query CurrentUser {
     displayName
     profilePicture {
       id
-      url
+      url,
+      createdAt
+      owner {
+        id
+        username
+        displayName
+        profilePicture {
+          id,
+          url
+        }
+      }
     }
   }
 }`;

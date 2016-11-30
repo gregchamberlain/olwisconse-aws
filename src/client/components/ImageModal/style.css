@@ -1,9 +1,37 @@
 :local .container {
-  background-color: #eee;
+  background-color: #FFF;
   width: 90vw;
   height: 90vh;
   display: flex;
   align-items: stretch;
+}
+
+:local .header {
+  display: flex;
+  align-items: center;
+}
+
+:local .date {
+  color: #aaa;
+  font-size: 14px;
+}
+
+:local .ownerImage {
+  min-width: 40px;
+  height: 40px;
+  margin: 15px;
+  background-position: center;
+  background-size: cover;
+  border-radius: 24px;
+  background-color: #ccc;
+}
+
+:local .ownerName {
+  text-decoration: none;
+}
+
+:local .caption {
+  margin-bottom: 15px;
 }
 
 :local .display {

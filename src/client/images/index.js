@@ -16,6 +16,25 @@ const IMAGES_QUERY = gql`query Images {
   images {
     id
     url
+    location {
+      id
+      name
+    }
+    people {
+      id
+      username
+      displayName
+    }
+    createdAt
+    owner {
+      id
+      username
+      displayName
+      profilePicture {
+        id
+        url
+      }
+    }
   }
 }`;
 
@@ -23,6 +42,25 @@ const CREATE_IMAGES = gql`mutation CreateImage($urls: [String]!) {
   createImages(urls: $urls) {
     id
     url
+    location {
+      id
+      name
+    }
+    people {
+      id
+      username
+      displayName
+    }
+    createdAt
+    owner {
+      id
+      username
+      displayName
+      profilePicture {
+        id
+        url
+      }
+    }
   }
 }`;
 

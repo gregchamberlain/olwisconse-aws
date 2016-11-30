@@ -11,6 +11,8 @@ type Image {
   id: ID!
   url: String!
   owner: User
+  location: Location
+  people: [User]
   createdAt: String
   updatedAt: String
 }

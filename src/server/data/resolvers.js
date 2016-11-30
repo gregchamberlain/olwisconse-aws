@@ -35,6 +35,14 @@ const resolveFunctions = {
     owner({ owner }) {
       if (!owner) return null;
       return User.findById(owner);
+    },
+    location({ location }) {
+      if (!location) return null;
+      return Location.findById(location);
+    },
+    people({ people }) {
+      if (!people.length) return people;
+      return User.find({ _id: { $in: people }});
     }
   },
   Phrase: {

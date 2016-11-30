@@ -3,6 +3,7 @@ import Left from 'react-icons/lib/md/chevron-left';
 import Right from 'react-icons/lib/md/chevron-right';
 
 import Modal from '../Modal';
+import ImageSide from './ImageSide';
 import styles from './style.css';
 
 class ImageModal extends Component {
@@ -46,6 +47,7 @@ class ImageModal extends Component {
             </div>
           </div>
           <div className={styles.info}>
+            <ImageSide image={image} onCloseRequest={onCloseRequest} />
           </div>
         </div>
       </Modal>
