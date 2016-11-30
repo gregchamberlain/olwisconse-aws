@@ -13,16 +13,7 @@ const Profile = ({ data, mutate, client }) => {
       console.error('Failed Logout', err);
     });
   };
-
-  const uploadImage = () => {
-    cloudinary.openUploadWidget({
-      cloud_name: 'dnqyghipo',
-      upload_preset: 'bhxvnbw4'
-    }, (error, result) => {
-      console.log(error, result);
-    });
-  };
-
+  
   return data.loading ? <div>Loading...</div> : (
     <div>
       <ProfilePicture image={data.currentUser.profilePicture || {}}/>

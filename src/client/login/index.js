@@ -65,6 +65,7 @@ const mutation = gql`mutation Login($user: UserInput!) {
       username
       displayName
       profilePicture {
+        id
         url
       }
     }
