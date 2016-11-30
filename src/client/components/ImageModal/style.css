@@ -1,0 +1,59 @@
+:local .container {
+  background-color: #eee;
+  width: 90vw;
+  height: 90vh;
+  display: flex;
+  align-items: stretch;
+}
+
+:local .display {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+:local .displayOverlay {
+  position: absolute;
+  display: flex;
+  align-items: stretch;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+:local .navButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  font-size: 64px;
+  background-color: transparent;
+  opacity: 0.6;
+  color: white;
+  cursor: pointer;
+}
+
+:local .navButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+:local .spacer {
+  flex: 1
+}
+
+:local .image {
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-color: black;
+}
+
+:local .info {
+  width: 300px;
+}

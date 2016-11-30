@@ -1,3 +1,11 @@
 html {
   font-family: arial;
 }
+
+body {
+  overflow-y: scroll;
+}
+
+* {
+  box-sizing: border-box;
+}

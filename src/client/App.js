@@ -5,6 +5,7 @@ import { HashRouter, Match, Link } from 'react-router';
 
 import Toolbar from './components/Toolbar';
 import ImageUploader from './components/ImageUploader/ImageUploaderContainer';
+import ImageModal from './components/ImageModal/ImageModalContainer';
 
 import Home from './home';
 import Login from './login';
@@ -32,6 +33,7 @@ const App = ({ data }) => data.loading ? <div>Loading...</div> : (
           <Match exactly pattern="/images" component={ImageIndex} />
         </div>
         <ImageUploader />
+        <ImageModal />
       </div>
     </HashRouter>
   ) : (

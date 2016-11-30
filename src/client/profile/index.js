@@ -25,7 +25,7 @@ const Profile = ({ data, mutate, client }) => {
 
   return data.loading ? <div>Loading...</div> : (
     <div>
-      <ProfilePicture src={data.currentUser.profilePicture ? data.currentUser.profilePicture.url : null}/>
+      <ProfilePicture image={data.currentUser.profilePicture || {}}/>
       <h1>{data.currentUser.displayName}<small> - @{data.currentUser.username}</small></h1>
       <button onClick={logout}>Logout</button>
     </div>

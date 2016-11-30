@@ -1,0 +1,27 @@
+:local .backdrop {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+:local .close {
+  position: absolute;
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.8;
+  top: 10px;
+  right: 30px;
+  color: white;
+}
+
+:local .close:hover {
+  opacity: 1;
+}

@@ -8,8 +8,8 @@ import { openModal, closeModal } from '../redux/actions/uploadModal';
 import styles from './style.css';
 import { UploadButton } from '../components/ImageUploader';
 
-const ProfilePicture = ({ src, openUploader }) => (
-  <div className={styles.profilePicture} style={{backgroundImage: `url(${src})`}}>
+const ProfilePicture = ({ image, openUploader }) => (
+  <div className={styles.profilePicture} style={{backgroundImage: `url(${image.url})`}}>
     <div className={styles.profilePictureInner}>View</div>
     <div className={styles.profilePictureInner} onClick={openUploader}>Edit</div>
   </div>
@@ -29,7 +29,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(closeModal());
     },
     { multiple: false }
-  ))
+  )),
+  openImage: () => dispatch
 });
 
 const withConnect = connect(null, mapDispatchToProps)(ProfilePicture);

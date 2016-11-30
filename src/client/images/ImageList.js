@@ -5,11 +5,12 @@ import Add from 'react-icons/lib/md/add-circle';
 import styles from './style.css';
 import ImageListItem from './ImageListItem';
 import { openModal, closeModal } from '../redux/actions/uploadModal';
+import * as IMAGE_MODAL_ACTION from '../redux/actions/imageModal';
 
-const ImageList = ({ images, openUploader }) => (
+const ImageList = ({ images, openUploader, openImage }) => (
   <div className={styles.list}>
-    {images.map(image => (
-      <ImageListItem key={image.id} image={image} />
+    {images.map((image, index) => (
+      <ImageListItem key={image.id} image={image} onClick={openImage(index)}/>
     ))}
     <div className={styles.item} onClick={openUploader}>
       <Add />
@@ -23,7 +24,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       ownProps.onUploadComplete(urls);
       dispatch(closeModal());
     }
-  ))
+  )),
+  openImage: (index) => () => dispatch(IMAGE_MODAL_ACTION.openModal(ownProps.images, index))
 });
 
 export default connect(null, mapDispatchToProps)(ImageList);
