@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import styles from './style.css';
+import UserFragment from '../graphql/userFragment.gql';
 
 class Login extends Component {
   constructor(props) {
@@ -58,16 +59,12 @@ class Login extends Component {
 }
 
 const mutation = gql`mutation Login($user: UserInput!) {
-    login(user: $user) {
-      id
-      username
-      displayName
-      profilePicture {
-        id
-        url
-      }
-    }
-}`;
+  login(user: $user) {
+    ...UserFragment
+  }
+}
+${UserFragment}
+`;
 
 export default graphql(mutation, {
   props({ mutate }) {

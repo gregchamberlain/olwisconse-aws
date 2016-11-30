@@ -78,14 +78,14 @@ const resolveFunctions = {
       const salt = bcrypt.genSaltSync(10);
       const passwordDigest = bcrypt.hashSync(user.password, salt);
       return User.create({
-        username: user.username,
+        username: user.username.toLowerCase(),
         displayName: user.displayName,
         passwordDigest,
         sessionToken: ( Math.floor( Math.random() * 100000 ) ).toString() }
       );
     },
     async login(_, { user }, { res }) {
-      const currentUser = await   User.findOne({ username: user.username });
+      const currentUser = await   User.findOne({ username: user.username.toLowerCase() });
       if (!currentUser) throw new Error('User does not exist');
       if (bcrypt.compareSync(user.password, currentUser.passwordDigest)) {
         res.cookie('OLWISCONE_SESSION', currentUser.sessionToken, { maxAge: 1000 * 60 * 60 * 24 * 365 });
