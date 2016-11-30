@@ -141,6 +141,9 @@ const resolveFunctions = {
     createImages(_, { urls }, { req }) {
       const images = urls.map(url => ({ url, owner: req.user.id }));
       return Image.insertMany(images);
+    },
+    updateImage(_, { image }) {
+      return Image.findByIdAndUpdate(image.id, image, { new: true });
     }
   }
 };

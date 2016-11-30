@@ -74,6 +74,14 @@ input FileInput {
   type: String!
 }
 
+input ImageInput {
+  id: String!
+  url: String
+  caption: String
+  location: String
+  people: [String]!
+}
+
 type Mutation {
   signup(user: UserInput!): User
   login(user: UserInput!): User
@@ -84,5 +92,6 @@ type Mutation {
   createLocation(location: LocationInput!): Location
   createQuote(quote: QuoteInput!): Quote
   createImages(urls: [String]!): [Image]
+  updateImage(image: ImageInput!): Image
 }
 `;

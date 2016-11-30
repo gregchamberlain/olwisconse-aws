@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Link } from 'react-router';
+import { isEqual } from 'lodash';
 
 import styles from './style.css';
 import ImageInfo from './ImageInfo';
+import ImageForm from './ImageForm';
 
 class ImageSide extends Component {
   constructor(props) {
@@ -11,6 +13,16 @@ class ImageSide extends Component {
     this.state = {
       editing: false
     };
+  }
+
+  componentWillReceiveProps(props) {
+    if (!isEqual(props.image, this.props.image)) {
+      this.setState({ editing: false });
+    }
+  }
+
+  startEditing = () => {
+    this.setState({ editing: true });
   }
 
   render() {
@@ -34,8 +46,12 @@ class ImageSide extends Component {
           </div>
         </div>
         <div style={{ padding: 15 }}>
-          { this.state.editing ? null : <ImageInfo image={image} onCloseRequest={onCloseRequest}/>}
+          { this.state.editing ?
+            <ImageForm image={image} /> :
+            <ImageInfo image={image} onCloseRequest={onCloseRequest}/>
+          }
         </div>
+        <button onClick={this.startEditing}>Edit</button>
       </div>
     );
   }
