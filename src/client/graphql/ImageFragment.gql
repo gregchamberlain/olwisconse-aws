@@ -1,6 +1,8 @@
 fragment ImageFragment on Image {
   id
   url
+  caption
+  createdAt
   location {
     id
     name
@@ -14,7 +16,6 @@ fragment ImageFragment on Image {
       url
     }
   }
-  createdAt
   owner {
     id
     username

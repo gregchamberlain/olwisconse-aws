@@ -3,8 +3,7 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import ImageFragment from '../../graphql/ImageFragment.gql';
-// console.log(ImageFragment);
-import ImageModal from './index';
+import ImageShowcase from './ImageShowcase.js';
 import { closeModal, next, prev } from '../../redux/actions/imageModal';
 
 const mapStateToProps = ({ imageModal }) => ({
@@ -33,4 +32,4 @@ export default compose(
   graphql(query, {
     options: ({ id }) => ({ variables: { id: id }})
   })
-)(ImageModal);
+)(ImageShowcase);

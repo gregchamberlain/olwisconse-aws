@@ -5,35 +5,15 @@ import gql from 'graphql-tag';
 import ImageFragment from '../../graphql/ImageFragment.gql';
 // console.log(ImageFragment);
 import ImageModal from './index';
-import { closeModal, next, prev } from '../../redux/actions/imageModal';
+import { closeModal } from '../../redux/actions/imageModal';
 
 const mapStateToProps = ({ imageModal }) => ({
-  open: imageModal.open,
-  id: imageModal.collection[imageModal.index],
-  // image: imageModal.collection[imageModal.index],
-  hasNext: imageModal.collection.length !== imageModal.index + 1,
-  hasPrev: imageModal.index !== 0
+  open: imageModal.open
 });
 
 const mapDispatchToPtops = dispatch => ({
-  onCloseRequest: () => dispatch(closeModal()),
-  next: () => dispatch(next()),
-  prev: () => dispatch(prev())
+  onCloseRequest: () => dispatch(closeModal())
 });
 
-const query = gql`query Image($id: String!) {
-  image(id: $id) {
-    ...ImageFragment
-  }
-}
-${ImageFragment}
-`;
 
-
-// export default connect(mapStateToProps, mapDispatchToPtops)(ImageModal);
-export default compose(
-  connect(mapStateToProps, mapDispatchToPtops),
-  graphql(query, {
-    options: ({ id }) => ({ variables: { id: id }})
-  })
-)(ImageModal);
+export default connect(mapStateToProps, mapDispatchToPtops)(ImageModal);

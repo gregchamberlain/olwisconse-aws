@@ -26,10 +26,8 @@ class ImageModal extends Component {
 
   render() {
     const { data, next, prev, onCloseRequest, hasNext, hasPrev } = this.props;
-    console.log(data);
     if (data.loading) return null;
     const { image } = data;
-    if (!image) return null;
     return (
       <div className={styles.container}>
         <div className={styles.display}>

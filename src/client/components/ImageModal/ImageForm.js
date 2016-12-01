@@ -110,7 +110,7 @@ class ImageForm extends Component {
 
     return (
       <div>
-        <textarea placeholder="Caption" value={image.caption} onChange={this.update('caption')}/>
+        <textarea placeholder="Caption" value={image.caption || ""} onChange={this.update('caption')}/>
         <select onChange={this.update('location')} value={this.state.image.location}>
           <option value="">Select Location</option>
           { data.locations.map(location => (
@@ -172,7 +172,17 @@ ${ImageFragment}
 const mut = graphql(UPDATE_IMAGE, {
   props: ({ mutate }) => ({
     save: (image) => mutate({
-      variables: { image }
+      variables: { image },
+      updateQueries: {
+        Image: (prev, { mutationResult }) => {
+          const savedImage = mutationResult.data.updateImage;
+          update(prev, {
+            image: {
+              $set: savedImage
+            }
+          });
+        }
+      }
     })
   })
 })(ImageForm);
