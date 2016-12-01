@@ -25,7 +25,11 @@ class ImageModal extends Component {
   }
 
   render() {
-    const { image, next, prev, onCloseRequest, open, hasNext, hasPrev } = this.props;
+    const { data, next, prev, onCloseRequest, open, hasNext, hasPrev } = this.props;
+    console.log(data);
+    if (data.loading) return null;
+    const { image } = data;
+    if (!image) return null;
     return (
       <Modal open={open} onCloseRequest={onCloseRequest}>
         <div className={styles.container}>

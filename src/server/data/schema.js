@@ -49,6 +49,7 @@ type Query {
   location(id: String!): Location
   quotes: [Quote]
   images: [Image]
+  image(id: String!): Image
 }
 
 input UserInput {

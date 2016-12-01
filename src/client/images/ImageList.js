@@ -27,7 +27,11 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       dispatch(closeModal());
     }
   )),
-  openImage: (index) => () => dispatch(IMAGE_MODAL_ACTION.openModal(ownProps.images, index))
+  openImage: (index) => () => dispatch(IMAGE_MODAL_ACTION.openModal(
+    ownProps.images.map(image => image.id),
+    // ownProps.images,
+    index
+  ))
 });
 
 export default connect(null, mapDispatchToProps)(ImageList);

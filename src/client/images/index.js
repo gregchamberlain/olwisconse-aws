@@ -8,6 +8,7 @@ import ImageFragment from '../graphql/ImageFragment.gql';
 
 const ImageIndex = ({ data, create }) => data.loading ? <h1>Loading...</h1> : (
   <div>
+    {console.log('IMAGES', data)}
     <h1 style={{textAlign: 'center'}}>All Images</h1>
     { data.images && <ImageList images={data.images} onUploadComplete={create} />}
   </div>
@@ -18,7 +19,7 @@ const IMAGES_QUERY = gql`query Images {
     ...ImageFragment
   }
 }
-  ${ImageFragment}
+${ImageFragment}
 `;
 
 const CREATE_IMAGES = gql`mutation CreateImage($urls: [String]!) {

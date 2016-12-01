@@ -1,5 +1,5 @@
 import React from 'react';
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import ApolloClient, { createNetworkInterface, toIdValue } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
 import configureStore from './redux/store';
 
@@ -17,9 +17,21 @@ const opts = process.env.NODE_ENV === 'production' ? ({
   }
 });
 
+const dataIdFromObject = o => {
+  if (o.id && o.__typename) {
+    return o.__typename + o.id;
+  }
+  return null;
+
+};
 const config = {
   networkInterface: createNetworkInterface(opts),
-  dataIdFromObject: o => o.id
+  customResolvers: {
+    Query: {
+      image: (_, args) => toIdValue(dataIdFromObject({ __typename: 'Image', id: args['id'] })),
+    },
+  },
+  dataIdFromObject
 };
 
 const client = new ApolloClient(config);

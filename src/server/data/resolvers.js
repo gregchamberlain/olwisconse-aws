@@ -77,6 +77,9 @@ const resolveFunctions = {
     },
     images() {
       return Image.find();
+    },
+    image({ id }) {
+      return Image.findById(id);
     }
   },
   Mutation: {
