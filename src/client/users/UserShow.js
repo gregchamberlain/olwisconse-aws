@@ -8,7 +8,6 @@ import ImageList from '../images/ImageList';
 
 const UserShow = ({ data }) => data.loading ? <div>Loading...</div> : (
   <div>
-    {console.log(data)}
     <h1>{data.user.username}</h1>
     <h3>Quotes</h3>
     <QuoteList quotes={data.user.quotes} />

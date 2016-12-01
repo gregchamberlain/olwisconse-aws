@@ -5,16 +5,15 @@ import gql from 'graphql-tag';
 import ImageFragment from '../../graphql/ImageFragment.gql';
 import ImageShowcase from './ImageShowcase.js';
 import { closeModal, next, prev } from '../../redux/actions/imageModal';
+import withModal from '../Modal/withModal';
 
 const mapStateToProps = ({ imageModal }) => ({
-  open: imageModal.open,
   id: imageModal.collection[imageModal.index],
   hasNext: imageModal.collection.length !== imageModal.index + 1,
   hasPrev: imageModal.index !== 0
 });
 
 const mapDispatchToPtops = dispatch => ({
-  onCloseRequest: () => dispatch(closeModal()),
   next: () => dispatch(next()),
   prev: () => dispatch(prev())
 });
@@ -28,8 +27,9 @@ ${ImageFragment}
 `;
 
 export default compose(
+  withModal({open: ({ imageModal }) => imageModal.open, close: (dispatch) => () => dispatch(closeModal())}),
   connect(mapStateToProps, mapDispatchToPtops),
   graphql(query, {
     options: ({ id }) => ({ variables: { id: id }})
-  })
+  }),
 )(ImageShowcase);

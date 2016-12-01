@@ -3,7 +3,6 @@ import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import ImageFragment from '../../graphql/ImageFragment.gql';
-// console.log(ImageFragment);
 import ImageModal from './index';
 import { closeModal } from '../../redux/actions/imageModal';
 

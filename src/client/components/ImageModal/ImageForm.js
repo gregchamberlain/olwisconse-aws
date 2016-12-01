@@ -94,9 +94,7 @@ class ImageForm extends Component {
       location,
       people: people.filter(p => p !== '')
     };
-    this.props.save(image).then(({ data }) => {
-      console.log(data);
-    }).catch(err => {
+    this.props.save(image).catch(err => {
       console.error(err);
     });
   }

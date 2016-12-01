@@ -6,7 +6,7 @@ import Modal from '../Modal';
 import ImageSide from './ImageSide';
 import styles from './style.css';
 
-class ImageModal extends Component {
+class ImageShowcase extends Component {
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyPress);
@@ -57,4 +57,4 @@ class ImageModal extends Component {
   }
 }
 
-export default ImageModal;
+export default ImageShowcase;

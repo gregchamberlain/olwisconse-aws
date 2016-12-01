@@ -7,7 +7,7 @@ import currentUserQuery from './graphql/currentUser.gql';
 
 import Toolbar from './components/Toolbar';
 import ImageUploader from './components/ImageUploader/ImageUploaderContainer';
-import ImageModal from './components/ImageModal/ImageModalContainer';
+import ImageModal from './components/ImageModal/ImageShowcaseContainer';
 
 import Home from './home';
 import Login from './login';
