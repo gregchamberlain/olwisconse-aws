@@ -49,6 +49,9 @@ const resolveFunctions = {
     people({ people }) {
       if (!people.length) return people;
       return User.find({ _id: { $in: people }});
+    },
+    createdAt({ createdAt }) {
+      return createdAt.toISOString();
     }
   },
   Phrase: {
